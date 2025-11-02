@@ -135,6 +135,12 @@ function App() {
           label: 'Net P&L',
           value: currencyFormatter.format(result.netProfit ?? 0),
         },
+        result?.netProfitPercent != null
+          ? {
+              label: 'Net %',
+              value: percentFormatter.format(result.netProfitPercent),
+            }
+          : null,
         {
           label: 'Win Rate',
           value: percentFormatter.format(result.metrics.winRate ?? 0),
@@ -147,7 +153,7 @@ function App() {
           label: 'Max Drawdown',
           value: percentFormatter.format(result.metrics.maxDrawdown ?? 0),
         },
-      ]
+      ].filter(Boolean)
     : []
 
   return (
@@ -179,9 +185,10 @@ function App() {
           <TabList activeTab={activeTab} onChange={setActiveTab} />
           <div className="panel-body">
             {activeTab === 'chart' && (
-              <div className="placeholder">
-                Price chart, indicators, and trade markers will render here.
-              </div>
+              <PriceTable
+                symbol={result?.symbol ?? symbol}
+                candles={result?.priceSeries ?? []}
+              />
             )}
 
             {activeTab === 'equity' && (
@@ -196,6 +203,10 @@ function App() {
 
             {activeTab === 'trades' && (
               <TradesTable trades={result?.trades ?? []} />
+            )}
+
+            {activeTab === 'orders' && (
+              <OrdersTable orders={result?.orders ?? []} />
             )}
 
             {activeTab === 'indicators' && (
@@ -331,6 +342,7 @@ function TabList({ activeTab, onChange }) {
     { id: 'chart', label: 'Price & Trades' },
     { id: 'equity', label: 'Equity' },
     { id: 'trades', label: 'Trades' },
+    { id: 'orders', label: 'Orders' },
     { id: 'indicators', label: 'Indicators' },
     { id: 'metrics', label: 'Metrics' },
   ]
@@ -393,16 +405,101 @@ function TradesTable({ trades }) {
               <td>{trade.direction}</td>
               <td>
                 <div>{trade.entryTime}</div>
-                <span className="muted">${trade.entryPrice.toFixed(2)}</span>
+                <span className="muted">
+                  ${Number(trade.entryPrice ?? 0).toFixed(2)}
+                </span>
               </td>
               <td>
                 <div>{trade.exitTime}</div>
-                <span className="muted">${trade.exitPrice.toFixed(2)}</span>
+                <span className="muted">
+                  ${Number(trade.exitPrice ?? 0).toFixed(2)}
+                </span>
               </td>
               <td>{trade.quantity}</td>
               <td className={trade.profit >= 0 ? 'profit' : 'loss'}>
                 {currencyFormatter.format(trade.profit)}
               </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  )
+}
+
+function OrdersTable({ orders }) {
+  if (!orders.length) {
+    return <div className="placeholder">No orders captured yet.</div>
+  }
+
+  return (
+    <div className="trades-table-wrapper">
+      <table className="trades-table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Time</th>
+            <th>Status</th>
+            <th>Type</th>
+            <th>Direction</th>
+            <th>Qty</th>
+            <th>Price</th>
+            <th>Tag</th>
+          </tr>
+        </thead>
+        <tbody>
+          {orders.map((order) => (
+            <tr key={order.id}>
+              <td>{order.id}</td>
+              <td>{order.time ?? '—'}</td>
+              <td>{order.status ?? '—'}</td>
+              <td>{order.type ?? '—'}</td>
+              <td>{order.direction ?? '—'}</td>
+              <td>{order.quantity ?? '—'}</td>
+              <td>
+                {order.price != null
+                  ? currencyFormatter.format(order.price)
+                  : '—'}
+              </td>
+              <td>{order.tag || '—'}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  )
+}
+
+function PriceTable({ symbol, candles }) {
+  if (!candles.length) {
+    return <div className="placeholder">Run a backtest to see price data.</div>
+  }
+
+  const rows = candles.slice(-200)
+
+  return (
+    <div className="trades-table-wrapper">
+      <table className="trades-table">
+        <thead>
+          <tr>
+            <th colSpan={5}>{symbol} Candles (most recent 200)</th>
+          </tr>
+          <tr>
+            <th>Date</th>
+            <th>Open</th>
+            <th>High</th>
+            <th>Low</th>
+            <th>Close</th>
+          </tr>
+        </thead>
+        <tbody>
+          {rows.map((candle) => (
+            <tr key={candle.time}>
+              <td>{candle.time}</td>
+              <td>{Number(candle.open ?? 0).toFixed(2)}</td>
+              <td>{Number(candle.high ?? candle.open ?? 0).toFixed(2)}</td>
+              <td>{Number(candle.low ?? candle.open ?? 0).toFixed(2)}</td>
+              <td>{Number(candle.close ?? 0).toFixed(2)}</td>
             </tr>
           ))}
         </tbody>

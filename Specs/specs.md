@@ -54,8 +54,10 @@ Completed Work
 - Export utility `scripts/export_spy_daily.py` generates SPY OHLCV JSON for rapid UI prototyping.
 - React frontend in `ui/` delivers the algorithm picker, timeframe controls, tabbed views, and placeholder visualizations.
 - Requirement documentation housed in `Specs/` keeps product scope aligned across teams.
-- FastAPI backend stub (`backend/app.py`) exposes `/algorithms`, `/backtests`, and `/market-data`, queueing jobs asynchronously and returning sample outputs.
+- FastAPI backend (`backend/app.py`) now launches Lean via the CLI, tracks job lifecycle, and normalizes backtest outputs (equity, candles, trades, orders, indicators, statistics) for the UI.
+- React UI consumes live Lean backtest payloads (candles, trades, orders) and renders them in-tab tables while polling job status.
 - Automated smoke test (FastAPI `TestClient`) validates job lifecycle and market data endpoints.
+- Local dev runbook validated: installed missing `uvicorn`/FastAPI dependencies, confirmed backend live on `http://127.0.0.1:8000`, and brought up the Vite UI server on `http://localhost:5173/`.
 
 Architecture Diagram
 --------------------
@@ -74,8 +76,9 @@ flowchart LR
 
 Outstanding Work
 ----------------
-1. Evolve backend stub into a Lean job runner (spawn CLI, capture artifacts, persist job state/results).
-2. Integrate Lean result normalization so charts, trades, and metrics map to frontend schemas.
-3. Replace mock data in the React app with live API responses once Lean integration is ready.
-4. Add automated tests covering backend orchestration, data transformation, and frontend API adapters.
-5. Integrate a production-grade charting library (e.g., lightweight-charts) wired to backend candle/indicator feeds.
+1. Surface additional analytics (drawdown series, benchmark comparison, order P&L) that the UI will eventually visualize.
+2. Persist recent backtest runs and expose a job history view within the UI.
+3. Add automated tests covering backend orchestration, data transformation, frontend API adapters, and include integration smoke tests that hit the FastAPI endpoints plus UI ↔ backend contract tests.
+4. Integrate a production-grade charting library (e.g., lightweight-charts) wired to backend candle/indicator feeds.
+5. Document the validated backend/UI startup runbook, monitor the lingering pip distribution warnings, and ensure future environment bootstrap pulls in FastAPI/Uvicorn out of the box.
+6. Perform manual end-to-end QA after each iteration (launch UI at `http://localhost:5173/`, trigger a Lean backtest, verify tables/charts) until automated coverage is in place.

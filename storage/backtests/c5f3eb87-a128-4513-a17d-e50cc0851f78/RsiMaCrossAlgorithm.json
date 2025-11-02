@@ -11322,8 +11322,8 @@
     "Volume": "$8,060,284.44"
   },
   "state": {
-    "StartTime": "2025-11-02T04:21:03Z",
-    "EndTime": "2025-11-02T04:21:06Z",
+    "StartTime": "2025-11-02T05:13:20Z",
+    "EndTime": "2025-11-02T05:13:22Z",
     "RuntimeError": "",
     "StackTrace": "",
     "LogCount": "7",
@@ -11339,7 +11339,10 @@
     "accountCurrency": "USD",
     "brokerage": 0,
     "accountType": 0,
-    "parameters": {},
+    "parameters": {
+      "rsiPeriod": "14",
+      "smoothingPeriod": "5"
+    },
     "outOfSampleMaxEndDate": null,
     "outOfSampleDays": 0,
     "startDate": "2018-01-01T00:00:00Z",
