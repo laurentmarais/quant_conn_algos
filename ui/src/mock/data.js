@@ -1,0 +1,115 @@
+export const mockAlgorithms = [
+  {
+    id: 'rsi-ma-cross',
+    name: 'RSI / RSI-MA Crossover',
+    description:
+      'Buys when the RSI dips below its moving average and exits when the RSI recovers above.',
+    defaults: {
+      symbol: 'SPY',
+      timeframe: '1D',
+      parameters: {
+        rsiPeriod: 14,
+        smoothingPeriod: 5,
+      },
+    },
+  },
+  {
+    id: 'mean-revert-grid',
+    name: 'Mean Reversion Grid',
+    description: 'Illustrative placeholder strategy for upcoming integrations.',
+    defaults: {
+      symbol: 'QQQ',
+      timeframe: '1H',
+      parameters: {
+        gridSize: 6,
+        riskPerTrade: 0.01,
+      },
+    },
+  },
+]
+
+export const mockBacktestResult = {
+  jobId: 'sample-job',
+  status: 'completed',
+  startedAt: '2020-01-01',
+  endedAt: '2020-03-31',
+  symbol: 'SPY',
+  timeframe: '1D',
+  capital: 100000,
+  netProfit: -1625,
+  trades: [
+    {
+      id: 1,
+      direction: 'Long',
+      entryTime: '2020-01-08',
+      exitTime: '2020-01-15',
+      entryPrice: 323.4,
+      exitPrice: 325.9,
+      quantity: 90,
+      profit: 225,
+    },
+    {
+      id: 2,
+      direction: 'Long',
+      entryTime: '2020-02-04',
+      exitTime: '2020-02-27',
+      entryPrice: 332.5,
+      exitPrice: 295.1,
+      quantity: 90,
+      profit: -3366,
+    },
+    {
+      id: 3,
+      direction: 'Long',
+      entryTime: '2020-03-18',
+      exitTime: '2020-03-24',
+      entryPrice: 227.1,
+      exitPrice: 235.9,
+      quantity: 120,
+      profit: 516,
+    },
+  ],
+  metrics: {
+    totalTrades: 3,
+    winningTrades: 2,
+    losingTrades: 1,
+    winRate: 0.67,
+    maxDrawdown: 0.12,
+    sharpe: -0.43,
+    sortino: -0.51,
+  },
+  equityCurve: [
+    { time: '2020-01-02', value: 100000 },
+    { time: '2020-01-15', value: 100225 },
+    { time: '2020-02-20', value: 100800 },
+    { time: '2020-02-28', value: 96350 },
+    { time: '2020-03-24', value: 98625 },
+  ],
+  priceSeries: [
+    { time: '2020-01-02', open: 324.6, high: 326.2, low: 323.0, close: 324.0 },
+    { time: '2020-01-08', open: 323.2, high: 325.5, low: 322.9, close: 325.1 },
+    { time: '2020-01-23', open: 333.3, high: 334.1, low: 332.3, close: 333.8 },
+    { time: '2020-02-19', open: 338.2, high: 339.0, low: 337.5, close: 338.7 },
+    { time: '2020-02-27', open: 308.0, high: 309.5, low: 297.6, close: 298.6 },
+    { time: '2020-03-18', open: 244.2, high: 247.2, low: 229.4, close: 244.4 },
+    { time: '2020-03-24', open: 234.1, high: 236.0, low: 226.5, close: 234.8 },
+  ],
+  indicators: {
+    rsi: [
+      { time: '2020-01-02', value: 54 },
+      { time: '2020-01-15', value: 48 },
+      { time: '2020-02-19', value: 72 },
+      { time: '2020-02-27', value: 22 },
+      { time: '2020-03-18', value: 18 },
+      { time: '2020-03-24', value: 42 },
+    ],
+    rsiSma: [
+      { time: '2020-01-02', value: 50 },
+      { time: '2020-01-15', value: 49 },
+      { time: '2020-02-19', value: 55 },
+      { time: '2020-02-27', value: 35 },
+      { time: '2020-03-18', value: 31 },
+      { time: '2020-03-24', value: 38 },
+    ],
+  },
+}

@@ -1,0 +1,548 @@
+2025-10-31T11:03:50.1071800Z TRACE:: Engine.Main(): LEAN ALGORITHMIC TRADING ENGINE v2.5.0.0 Mode: DEBUG (64bit) Host: MacBook-Pro
+2025-10-31T11:03:50.1154370Z TRACE:: Engine.Main(): Started 1:03 PM
+2025-10-31T11:03:50.1155920Z TRACE:: Config.Get(): Configuration key not found. Key: job-queue-handler - Using default value: QuantConnect.Queues.JobQueue
+2025-10-31T11:03:50.1160220Z TRACE:: Config.Get(): Configuration key not found. Key: api-handler - Using default value: QuantConnect.Api.Api
+2025-10-31T11:03:50.1163910Z TRACE:: Config.Get(): Configuration key not found. Key: messaging-handler - Using default value: QuantConnect.Messaging.Messaging
+2025-10-31T11:03:50.1165720Z TRACE:: Config.Get(): Configuration key not found. Key: lean-manager-type - Using default value: LocalLeanManager
+2025-10-31T11:03:50.1254190Z TRACE:: JobQueue.NextJob(): Selected /Users/laurentmarais/Documents/GitHub/quant_conn_algos/rsi_ma_cross.py
+2025-10-31T11:03:50.1254610Z TRACE:: Config.Get(): Configuration key not found. Key: parameters - Using default value: 
+2025-10-31T11:03:50.1258410Z TRACE:: Config.GetValue(): scheduled-event-leaky-bucket-capacity - Using default value: 120
+2025-10-31T11:03:50.1258530Z TRACE:: Config.GetValue(): scheduled-event-leaky-bucket-time-interval-minutes - Using default value: 1440
+2025-10-31T11:03:50.1258620Z TRACE:: Config.GetValue(): scheduled-event-leaky-bucket-refill-amount - Using default value: 18
+2025-10-31T11:03:50.1259320Z TRACE:: Config.GetValue(): symbol-minute-limit - Using default value: 10000
+2025-10-31T11:03:50.1259410Z TRACE:: Config.GetValue(): symbol-second-limit - Using default value: 10000
+2025-10-31T11:03:50.1259490Z TRACE:: Config.GetValue(): symbol-tick-limit - Using default value: 10000
+2025-10-31T11:03:50.1259580Z TRACE:: Config.GetValue(): maximum-data-points-per-chart-series - Using default value: 1000000
+2025-10-31T11:03:50.1259650Z TRACE:: Config.GetValue(): maximum-chart-series - Using default value: 30
+2025-10-31T11:03:50.1263410Z TRACE:: Config.GetValue(): storage-limit - Using default value: 10737418240
+2025-10-31T11:03:50.1263500Z TRACE:: Config.GetValue(): storage-file-count - Using default value: 10000
+2025-10-31T11:03:50.1267460Z TRACE:: Config.GetValue(): storage-permissions - Using default value: Read=True Write=True Delete=True
+2025-10-31T11:03:50.1267560Z TRACE:: Config.Get(): Configuration key not found. Key: algorithm-id - Using default value: RsiMaCrossAlgorithm
+2025-10-31T11:03:50.1267780Z TRACE:: Config.Get(): Configuration key not found. Key: optimization-id - Using default value: 
+2025-10-31T11:03:50.1267870Z TRACE:: Config.Get(): Configuration key not found. Key: backtest-name - Using default value: local
+2025-10-31T11:03:50.1284820Z TRACE:: Config.Get(): Configuration key not found. Key: data-channel - Using default value: 
+2025-10-31T11:03:50.1285900Z TRACE:: Config.Get(): Configuration key not found. Key: python-venv - Using default value: 
+2025-10-31T11:03:50.1286290Z TRACE:: Config.Get(): Configuration key not found. Key: out-of-sample-max-end-date - Using default value: 
+2025-10-31T11:03:50.1286410Z TRACE:: Config.GetValue(): out-of-sample-days - Using default value: 0
+2025-10-31T11:03:50.1290580Z TRACE:: Config.Get(): Configuration key not found. Key: map-file-provider - Using default value: LocalDiskMapFileProvider
+2025-10-31T11:03:50.1290710Z TRACE:: Config.Get(): Configuration key not found. Key: factor-file-provider - Using default value: LocalDiskFactorFileProvider
+2025-10-31T11:03:50.1290870Z TRACE:: Config.Get(): Configuration key not found. Key: data-provider - Using default value: DefaultDataProvider
+2025-10-31T11:03:50.1290970Z TRACE:: Config.Get(): Configuration key not found. Key: object-store - Using default value: LocalObjectStore
+2025-10-31T11:03:50.1291080Z TRACE:: Config.Get(): Configuration key not found. Key: data-permission-manager - Using default value: DataPermissionManager
+2025-10-31T11:03:50.1291160Z TRACE:: Config.Get(): Configuration key not found. Key: data-monitor - Using default value: QuantConnect.Data.DataMonitor
+2025-10-31T11:03:50.1349600Z TRACE:: Config.GetValue(): initialization-timeout - Using default value: 300
+2025-10-31T11:03:50.1349980Z TRACE:: Config.GetValue(): algorithm-creation-timeout - Using default value: 90
+2025-10-31T11:03:50.1392250Z TRACE:: Config.GetValue(): zip-data-cache-provider - Using default value: 10
+2025-10-31T11:03:50.1398810Z TRACE:: Config.Get(): Configuration key not found. Key: fundamental-data-provider - Using default value: CoarseFundamentalDataProvider
+2025-10-31T11:03:50.1407280Z TRACE:: AlgorithmManager.CreateTokenBucket(): Initializing LeakyBucket: Capacity: 120 RefillAmount: 18 TimeInterval: 1440
+2025-10-31T11:03:50.1410580Z TRACE:: Config.GetValue(): algorithm-manager-time-loop-maximum - Using default value: 20
+2025-10-31T11:03:50.1428380Z TRACE:: Config.GetValue(): downloader-data-update-period - Using default value: 7
+2025-10-31T11:03:50.1442460Z TRACE:: Engine.Run(): Resource limits '0' CPUs. 2147483647 MB RAM.
+2025-10-31T11:03:50.1444450Z TRACE:: TextSubscriptionDataSourceReader.SetCacheSize(): Setting cache size to 71582788 items
+2025-10-31T11:03:50.4169670Z TRACE:: Config.GetValue(): force-exchange-always-open - Using default value: False
+2025-10-31T11:03:50.4173160Z TRACE:: Config.GetValue(): debugging - Using default value: False
+2025-10-31T11:03:50.4180500Z TRACE:: PythonInitializer.Initialize(): start...
+2025-10-31T11:03:50.4291410Z ERROR:: Loader.TryCreatePythonAlgorithm():  Python.Runtime.BadPythonDllException: Runtime.PythonDLL was not set or does not point to a supported Python runtime DLL. See pythonnet#embedding-python-in-net
+ ---> System.MissingMethodException: Failed to load symbol Py_IncRef: dlsym(RTLD_DEFAULT, Py_IncRef): symbol not found
+   at Python.Runtime.Platform.PosixLoader.GetFunction(IntPtr dllHandle, String name)
+   at Python.Runtime.Runtime.Delegates.GetFunctionByName(String functionName, IntPtr libraryHandle)
+   --- End of inner exception stack trace ---
+   at Python.Runtime.Runtime.TryUsingDll[T](Func`1 op)
+   at Python.Runtime.Runtime.Initialize(Boolean initSigs)
+   at Python.Runtime.PythonEngine.Initialize(IEnumerable`1 args, Boolean setSysArgv, Boolean initSigs)
+   at Python.Runtime.PythonEngine.Initialize(Boolean setSysArgv, Boolean initSigs)
+   at Python.Runtime.PythonEngine.Initialize()
+   at QuantConnect.Python.PythonInitializer.Initialize(Boolean beginAllowThreads) in Common/Python/PythonInitializer.cs:line 56
+   at QuantConnect.AlgorithmFactory.Loader.TryCreatePythonAlgorithm(String assemblyPath, IAlgorithm& algorithmInstance, String& errorMessage) in AlgorithmFactory/Loader.cs:line 171
+2025-10-31T11:03:50.4302130Z ERROR:: Engine.Run():  QuantConnect.Lean.Engine.Setup.AlgorithmSetupException: During the algorithm initialization, the following exception has occurred: Loader.TryCreatePythonAlgorithm(): Unable to import python module /Users/laurentmarais/Documents/GitHub/quant_conn_algos/rsi_ma_cross.py. Runtime.PythonDLL was not set or does not point to a supported Python runtime DLL. See pythonnet#embedding-python-in-net
+   at QuantConnect.Lean.Engine.Setup.BacktestingSetupHandler.CreateAlgorithmInstance(AlgorithmNodePacket algorithmNodePacket, String assemblyPath) in Engine/Setup/BacktestingSetupHandler.cs:line 113
+   at QuantConnect.Lean.Engine.Engine.Run(AlgorithmNodePacket job, AlgorithmManager manager, String assemblyPath, WorkerThread workerThread) in Engine/Engine.cs:line 118
+2025-10-31T11:03:50.4304750Z TRACE:: JOB HANDLERS:
+         DataFeed:             QuantConnect.Lean.Engine.DataFeeds.FileSystemDataFeed
+         Setup:                QuantConnect.Lean.Engine.Setup.BacktestingSetupHandler
+         RealTime:             QuantConnect.Lean.Engine.RealTime.BacktestingRealTimeHandler
+         Results:              QuantConnect.Lean.Engine.Results.BacktestingResultHandler
+         Transactions:         QuantConnect.Lean.Engine.TransactionHandlers.BacktestingTransactionHandler
+         Object Store:         QuantConnect.Lean.Engine.Storage.LocalObjectStore
+         History Provider:     
+         Brokerage:            
+         Data Provider:        QuantConnect.Lean.Engine.DataFeeds.DefaultDataProvider
+
+2025-10-31T11:03:50.4307440Z TRACE:: BacktestingResultHandler.Exit(): starting...
+2025-10-31T11:03:50.4309320Z TRACE:: BacktestingResultHandler.Exit(): Saving logs...
+2025-10-31T11:03:50.4315820Z TRACE:: StopSafely(): Waiting for 'Result Thread' thread to stop...
+2025-10-31T11:03:50.4317780Z ERROR:: Algorithm.Initialize() Error: During the algorithm initialization, the following exception has occurred: Loader.TryCreatePythonAlgorithm(): Unable to import python module /Users/laurentmarais/Documents/GitHub/quant_conn_algos/rsi_ma_cross.py. Runtime.PythonDLL was not set or does not point to a supported Python runtime DLL. See https://github.com/pythonnet/pythonnet#embedding-python-in-net Stack Trace: During the algorithm initialization, the following exception has occurred: Loader.TryCreatePythonAlgorithm(): Unable to import python module /Users/laurentmarais/Documents/GitHub/quant_conn_algos/rsi_ma_cross.py. Runtime.PythonDLL was not set or does not point to a supported Python runtime DLL. See https://github.com/pythonnet/pythonnet#embedding-python-in-net
+ During the algorithm initialization, the following exception has occurred: Loader.TryCreatePythonAlgorithm(): Unable to import python module /Users/laurentmarais/Documents/GitHub/quant_conn_algos/rsi_ma_cross.py. Runtime.PythonDLL was not set or does not point to a supported Python runtime DLL. See https://github.com/pythonnet/pythonnet#embedding-python-in-net
+2025-10-31T11:03:50.4318020Z TRACE:: Debug: Your log was successfully created and can be retrieved from: /Users/laurentmarais/Documents/GitHub/quant_conn_algos/results/RsiMaCrossAlgorithm-log.txt
+2025-10-31T11:03:50.4318070Z TRACE:: BacktestingResultHandler.Run(): Ending Thread...
+2025-10-31T11:03:50.4339920Z TRACE:: BacktestingResultHandler.CreateResultSummary(): 'Strategy Equity' chart not found
+2025-10-31T11:03:50.4567390Z TRACE:: 
+STATISTICS:: OrderListHash d41d8cd98f00b204e9800998ecf8427e
+2025-10-31T11:03:50.4567510Z TRACE:: BacktestingResultHandler.SendAnalysisResult(): Processed final packet
+2025-10-31T11:03:50.4568690Z TRACE:: Engine.Run(): Disposing of setup handler...
+2025-10-31T11:03:50.4568850Z TRACE:: Engine.Main(): Analysis Completed and Results Posted.
+2025-10-31T11:03:50.4573490Z TRACE:: Config.GetValue(): close-automatically - Using default value: False
+2025-10-31T11:03:54.4567280Z TRACE:: Engine.Main(): Packet removed from queue: RsiMaCrossAlgorithm
+2025-10-31T11:03:54.4572870Z TRACE:: LeanEngineSystemHandlers.Dispose(): start...
+2025-10-31T11:03:54.4588580Z TRACE:: LeanEngineSystemHandlers.Dispose(): Disposed of system handlers.
+2025-10-31T11:03:54.4592570Z TRACE:: LeanEngineAlgorithmHandlers.Dispose(): start...
+2025-10-31T11:03:54.4627560Z TRACE:: LocalObjectStore.Dispose(): start...
+2025-10-31T11:03:54.4629610Z TRACE:: LocalObjectStore.Dispose(): end
+2025-10-31T11:03:54.4635780Z TRACE:: LeanEngineAlgorithmHandlers.Dispose(): Disposed of algorithm handlers.
+2025-10-31T11:05:49.2339400Z TRACE:: Engine.Main(): LEAN ALGORITHMIC TRADING ENGINE v2.5.0.0 Mode: DEBUG (64bit) Host: MacBook-Pro
+2025-10-31T11:05:49.2424060Z TRACE:: Engine.Main(): Started 1:05 PM
+2025-10-31T11:05:49.2425570Z TRACE:: Config.Get(): Configuration key not found. Key: job-queue-handler - Using default value: QuantConnect.Queues.JobQueue
+2025-10-31T11:05:49.2429370Z TRACE:: Config.Get(): Configuration key not found. Key: api-handler - Using default value: QuantConnect.Api.Api
+2025-10-31T11:05:49.2433750Z TRACE:: Config.Get(): Configuration key not found. Key: messaging-handler - Using default value: QuantConnect.Messaging.Messaging
+2025-10-31T11:05:49.2437200Z TRACE:: Config.Get(): Configuration key not found. Key: lean-manager-type - Using default value: LocalLeanManager
+2025-10-31T11:05:49.2523150Z TRACE:: JobQueue.NextJob(): Selected /Users/laurentmarais/Documents/GitHub/quant_conn_algos/rsi_ma_cross.py
+2025-10-31T11:05:49.2523610Z TRACE:: Config.Get(): Configuration key not found. Key: parameters - Using default value: 
+2025-10-31T11:05:49.2527390Z TRACE:: Config.GetValue(): scheduled-event-leaky-bucket-capacity - Using default value: 120
+2025-10-31T11:05:49.2527590Z TRACE:: Config.GetValue(): scheduled-event-leaky-bucket-time-interval-minutes - Using default value: 1440
+2025-10-31T11:05:49.2527670Z TRACE:: Config.GetValue(): scheduled-event-leaky-bucket-refill-amount - Using default value: 18
+2025-10-31T11:05:49.2528360Z TRACE:: Config.GetValue(): symbol-minute-limit - Using default value: 10000
+2025-10-31T11:05:49.2528440Z TRACE:: Config.GetValue(): symbol-second-limit - Using default value: 10000
+2025-10-31T11:05:49.2528520Z TRACE:: Config.GetValue(): symbol-tick-limit - Using default value: 10000
+2025-10-31T11:05:49.2528610Z TRACE:: Config.GetValue(): maximum-data-points-per-chart-series - Using default value: 1000000
+2025-10-31T11:05:49.2528670Z TRACE:: Config.GetValue(): maximum-chart-series - Using default value: 30
+2025-10-31T11:05:49.2532600Z TRACE:: Config.GetValue(): storage-limit - Using default value: 10737418240
+2025-10-31T11:05:49.2532690Z TRACE:: Config.GetValue(): storage-file-count - Using default value: 10000
+2025-10-31T11:05:49.2536770Z TRACE:: Config.GetValue(): storage-permissions - Using default value: Read=True Write=True Delete=True
+2025-10-31T11:05:49.2536860Z TRACE:: Config.Get(): Configuration key not found. Key: algorithm-id - Using default value: RsiMaCrossAlgorithm
+2025-10-31T11:05:49.2537070Z TRACE:: Config.Get(): Configuration key not found. Key: optimization-id - Using default value: 
+2025-10-31T11:05:49.2537160Z TRACE:: Config.Get(): Configuration key not found. Key: backtest-name - Using default value: local
+2025-10-31T11:05:49.2550190Z TRACE:: Config.Get(): Configuration key not found. Key: data-channel - Using default value: 
+2025-10-31T11:05:49.2551040Z TRACE:: Config.Get(): Configuration key not found. Key: python-venv - Using default value: 
+2025-10-31T11:05:49.2551340Z TRACE:: Config.Get(): Configuration key not found. Key: out-of-sample-max-end-date - Using default value: 
+2025-10-31T11:05:49.2551430Z TRACE:: Config.GetValue(): out-of-sample-days - Using default value: 0
+2025-10-31T11:05:49.2555470Z TRACE:: Config.Get(): Configuration key not found. Key: map-file-provider - Using default value: LocalDiskMapFileProvider
+2025-10-31T11:05:49.2555750Z TRACE:: Config.Get(): Configuration key not found. Key: factor-file-provider - Using default value: LocalDiskFactorFileProvider
+2025-10-31T11:05:49.2555970Z TRACE:: Config.Get(): Configuration key not found. Key: data-provider - Using default value: DefaultDataProvider
+2025-10-31T11:05:49.2556080Z TRACE:: Config.Get(): Configuration key not found. Key: object-store - Using default value: LocalObjectStore
+2025-10-31T11:05:49.2556170Z TRACE:: Config.Get(): Configuration key not found. Key: data-permission-manager - Using default value: DataPermissionManager
+2025-10-31T11:05:49.2556250Z TRACE:: Config.Get(): Configuration key not found. Key: data-monitor - Using default value: QuantConnect.Data.DataMonitor
+2025-10-31T11:05:49.2614170Z TRACE:: Config.GetValue(): initialization-timeout - Using default value: 300
+2025-10-31T11:05:49.2614540Z TRACE:: Config.GetValue(): algorithm-creation-timeout - Using default value: 90
+2025-10-31T11:05:49.2644540Z TRACE:: Config.GetValue(): zip-data-cache-provider - Using default value: 10
+2025-10-31T11:05:49.2648420Z TRACE:: Config.Get(): Configuration key not found. Key: fundamental-data-provider - Using default value: CoarseFundamentalDataProvider
+2025-10-31T11:05:49.2655580Z TRACE:: AlgorithmManager.CreateTokenBucket(): Initializing LeakyBucket: Capacity: 120 RefillAmount: 18 TimeInterval: 1440
+2025-10-31T11:05:49.2659310Z TRACE:: Config.GetValue(): algorithm-manager-time-loop-maximum - Using default value: 20
+2025-10-31T11:05:49.2681480Z TRACE:: Config.GetValue(): downloader-data-update-period - Using default value: 7
+2025-10-31T11:05:49.2691650Z TRACE:: Engine.Run(): Resource limits '0' CPUs. 2147483647 MB RAM.
+2025-10-31T11:05:49.2693210Z TRACE:: TextSubscriptionDataSourceReader.SetCacheSize(): Setting cache size to 71582788 items
+2025-10-31T11:05:49.5304330Z TRACE:: Config.GetValue(): force-exchange-always-open - Using default value: False
+2025-10-31T11:05:49.5307860Z TRACE:: Config.GetValue(): debugging - Using default value: False
+2025-10-31T11:05:49.5315350Z TRACE:: PythonInitializer.Initialize(): start...
+2025-10-31T11:05:49.5475850Z ERROR:: Loader.TryCreatePythonAlgorithm():  System.TypeInitializationException: The type initializer for 'Delegates' threw an exception.
+ ---> System.MissingMethodException: Failed to load symbol _PyThreadState_UncheckedGet: dlsym(0x7273e2a0, _PyThreadState_UncheckedGet): symbol not found
+   at Python.Runtime.Platform.PosixLoader.GetFunction(IntPtr dllHandle, String name)
+   at Python.Runtime.Runtime.Delegates.GetFunctionByName(String functionName, IntPtr libraryHandle)
+   at Python.Runtime.Runtime.Delegates..cctor()
+   --- End of inner exception stack trace ---
+   at Python.Runtime.Runtime.Delegates.get_Py_IsInitialized()
+   at Python.Runtime.Runtime.Py_IsInitialized()
+   at Python.Runtime.Runtime.<>c.<Initialize>b__29_0()
+   at Python.Runtime.Runtime.TryUsingDll[T](Func`1 op)
+   at Python.Runtime.Runtime.Initialize(Boolean initSigs)
+   at Python.Runtime.PythonEngine.Initialize(IEnumerable`1 args, Boolean setSysArgv, Boolean initSigs)
+   at Python.Runtime.PythonEngine.Initialize(Boolean setSysArgv, Boolean initSigs)
+   at Python.Runtime.PythonEngine.Initialize()
+   at QuantConnect.Python.PythonInitializer.Initialize(Boolean beginAllowThreads) in Common/Python/PythonInitializer.cs:line 56
+   at QuantConnect.AlgorithmFactory.Loader.TryCreatePythonAlgorithm(String assemblyPath, IAlgorithm& algorithmInstance, String& errorMessage) in AlgorithmFactory/Loader.cs:line 171
+2025-10-31T11:05:49.5486400Z ERROR:: Engine.Run():  QuantConnect.Lean.Engine.Setup.AlgorithmSetupException: During the algorithm initialization, the following exception has occurred: Loader.TryCreatePythonAlgorithm(): Unable to import python module /Users/laurentmarais/Documents/GitHub/quant_conn_algos/rsi_ma_cross.py. The type initializer for 'Delegates' threw an exception.
+   at QuantConnect.Lean.Engine.Setup.BacktestingSetupHandler.CreateAlgorithmInstance(AlgorithmNodePacket algorithmNodePacket, String assemblyPath) in Engine/Setup/BacktestingSetupHandler.cs:line 113
+   at QuantConnect.Lean.Engine.Engine.Run(AlgorithmNodePacket job, AlgorithmManager manager, String assemblyPath, WorkerThread workerThread) in Engine/Engine.cs:line 118
+2025-10-31T11:05:49.5489300Z TRACE:: JOB HANDLERS:
+         DataFeed:             QuantConnect.Lean.Engine.DataFeeds.FileSystemDataFeed
+         Setup:                QuantConnect.Lean.Engine.Setup.BacktestingSetupHandler
+         RealTime:             QuantConnect.Lean.Engine.RealTime.BacktestingRealTimeHandler
+         Results:              QuantConnect.Lean.Engine.Results.BacktestingResultHandler
+         Transactions:         QuantConnect.Lean.Engine.TransactionHandlers.BacktestingTransactionHandler
+         Object Store:         QuantConnect.Lean.Engine.Storage.LocalObjectStore
+         History Provider:     
+         Brokerage:            
+         Data Provider:        QuantConnect.Lean.Engine.DataFeeds.DefaultDataProvider
+
+2025-10-31T11:05:49.5492180Z TRACE:: BacktestingResultHandler.Exit(): starting...
+2025-10-31T11:05:49.5495580Z TRACE:: BacktestingResultHandler.Exit(): Saving logs...
+2025-10-31T11:05:49.5502380Z TRACE:: StopSafely(): Waiting for 'Result Thread' thread to stop...
+2025-10-31T11:05:49.5504400Z ERROR:: Algorithm.Initialize() Error: During the algorithm initialization, the following exception has occurred: Loader.TryCreatePythonAlgorithm(): Unable to import python module /Users/laurentmarais/Documents/GitHub/quant_conn_algos/rsi_ma_cross.py. The type initializer for 'Delegates' threw an exception. Stack Trace: During the algorithm initialization, the following exception has occurred: Loader.TryCreatePythonAlgorithm(): Unable to import python module /Users/laurentmarais/Documents/GitHub/quant_conn_algos/rsi_ma_cross.py. The type initializer for 'Delegates' threw an exception.
+ During the algorithm initialization, the following exception has occurred: Loader.TryCreatePythonAlgorithm(): Unable to import python module /Users/laurentmarais/Documents/GitHub/quant_conn_algos/rsi_ma_cross.py. The type initializer for 'Delegates' threw an exception.
+2025-10-31T11:05:49.5504720Z TRACE:: Debug: Your log was successfully created and can be retrieved from: /Users/laurentmarais/Documents/GitHub/quant_conn_algos/results/RsiMaCrossAlgorithm-log.txt
+2025-10-31T11:05:49.5504790Z TRACE:: BacktestingResultHandler.Run(): Ending Thread...
+2025-10-31T11:05:49.5528420Z TRACE:: BacktestingResultHandler.CreateResultSummary(): 'Strategy Equity' chart not found
+2025-10-31T11:05:49.5748920Z TRACE:: 
+STATISTICS:: OrderListHash d41d8cd98f00b204e9800998ecf8427e
+2025-10-31T11:05:49.5749070Z TRACE:: BacktestingResultHandler.SendAnalysisResult(): Processed final packet
+2025-10-31T11:05:49.5750230Z TRACE:: Engine.Run(): Disposing of setup handler...
+2025-10-31T11:05:49.5750390Z TRACE:: Engine.Main(): Analysis Completed and Results Posted.
+2025-10-31T11:05:49.5755290Z TRACE:: Config.GetValue(): close-automatically - Using default value: False
+2025-10-31T11:05:54.4609770Z TRACE:: Engine.Main(): Packet removed from queue: RsiMaCrossAlgorithm
+2025-10-31T11:05:54.4612010Z TRACE:: LeanEngineSystemHandlers.Dispose(): start...
+2025-10-31T11:05:54.4618900Z TRACE:: LeanEngineSystemHandlers.Dispose(): Disposed of system handlers.
+2025-10-31T11:05:54.4622110Z TRACE:: LeanEngineAlgorithmHandlers.Dispose(): start...
+2025-10-31T11:05:54.4631070Z TRACE:: LocalObjectStore.Dispose(): start...
+2025-10-31T11:05:54.4631500Z TRACE:: LocalObjectStore.Dispose(): end
+2025-10-31T11:05:54.4633670Z TRACE:: LeanEngineAlgorithmHandlers.Dispose(): Disposed of algorithm handlers.
+2025-10-31T11:07:12.7591270Z TRACE:: Engine.Main(): LEAN ALGORITHMIC TRADING ENGINE v2.5.0.0 Mode: DEBUG (64bit) Host: MacBook-Pro
+2025-10-31T11:07:12.7679480Z TRACE:: Engine.Main(): Started 1:07 PM
+2025-10-31T11:07:12.7680880Z TRACE:: Config.Get(): Configuration key not found. Key: job-queue-handler - Using default value: QuantConnect.Queues.JobQueue
+2025-10-31T11:07:12.7689450Z TRACE:: Config.Get(): Configuration key not found. Key: api-handler - Using default value: QuantConnect.Api.Api
+2025-10-31T11:07:12.7695520Z TRACE:: Config.Get(): Configuration key not found. Key: messaging-handler - Using default value: QuantConnect.Messaging.Messaging
+2025-10-31T11:07:12.7698300Z TRACE:: Config.Get(): Configuration key not found. Key: lean-manager-type - Using default value: LocalLeanManager
+2025-10-31T11:07:12.7792830Z TRACE:: JobQueue.NextJob(): Selected /Users/laurentmarais/Documents/GitHub/quant_conn_algos/rsi_ma_cross.py
+2025-10-31T11:07:12.7793370Z TRACE:: Config.Get(): Configuration key not found. Key: parameters - Using default value: 
+2025-10-31T11:07:12.7797780Z TRACE:: Config.GetValue(): scheduled-event-leaky-bucket-capacity - Using default value: 120
+2025-10-31T11:07:12.7797930Z TRACE:: Config.GetValue(): scheduled-event-leaky-bucket-time-interval-minutes - Using default value: 1440
+2025-10-31T11:07:12.7798030Z TRACE:: Config.GetValue(): scheduled-event-leaky-bucket-refill-amount - Using default value: 18
+2025-10-31T11:07:12.7798740Z TRACE:: Config.GetValue(): symbol-minute-limit - Using default value: 10000
+2025-10-31T11:07:12.7798830Z TRACE:: Config.GetValue(): symbol-second-limit - Using default value: 10000
+2025-10-31T11:07:12.7798930Z TRACE:: Config.GetValue(): symbol-tick-limit - Using default value: 10000
+2025-10-31T11:07:12.7799030Z TRACE:: Config.GetValue(): maximum-data-points-per-chart-series - Using default value: 1000000
+2025-10-31T11:07:12.7799100Z TRACE:: Config.GetValue(): maximum-chart-series - Using default value: 30
+2025-10-31T11:07:12.7805530Z TRACE:: Config.GetValue(): storage-limit - Using default value: 10737418240
+2025-10-31T11:07:12.7805650Z TRACE:: Config.GetValue(): storage-file-count - Using default value: 10000
+2025-10-31T11:07:12.7809670Z TRACE:: Config.GetValue(): storage-permissions - Using default value: Read=True Write=True Delete=True
+2025-10-31T11:07:12.7809760Z TRACE:: Config.Get(): Configuration key not found. Key: algorithm-id - Using default value: RsiMaCrossAlgorithm
+2025-10-31T11:07:12.7810020Z TRACE:: Config.Get(): Configuration key not found. Key: optimization-id - Using default value: 
+2025-10-31T11:07:12.7810110Z TRACE:: Config.Get(): Configuration key not found. Key: backtest-name - Using default value: local
+2025-10-31T11:07:12.7824130Z TRACE:: Config.Get(): Configuration key not found. Key: data-channel - Using default value: 
+2025-10-31T11:07:12.7824940Z TRACE:: Config.Get(): Configuration key not found. Key: python-venv - Using default value: 
+2025-10-31T11:07:12.7825250Z TRACE:: Config.Get(): Configuration key not found. Key: out-of-sample-max-end-date - Using default value: 
+2025-10-31T11:07:12.7825330Z TRACE:: Config.GetValue(): out-of-sample-days - Using default value: 0
+2025-10-31T11:07:12.7829350Z TRACE:: Config.Get(): Configuration key not found. Key: map-file-provider - Using default value: LocalDiskMapFileProvider
+2025-10-31T11:07:12.7829440Z TRACE:: Config.Get(): Configuration key not found. Key: factor-file-provider - Using default value: LocalDiskFactorFileProvider
+2025-10-31T11:07:12.7829570Z TRACE:: Config.Get(): Configuration key not found. Key: data-provider - Using default value: DefaultDataProvider
+2025-10-31T11:07:12.7829640Z TRACE:: Config.Get(): Configuration key not found. Key: object-store - Using default value: LocalObjectStore
+2025-10-31T11:07:12.7829720Z TRACE:: Config.Get(): Configuration key not found. Key: data-permission-manager - Using default value: DataPermissionManager
+2025-10-31T11:07:12.7829780Z TRACE:: Config.Get(): Configuration key not found. Key: data-monitor - Using default value: QuantConnect.Data.DataMonitor
+2025-10-31T11:07:12.7893000Z TRACE:: Config.GetValue(): initialization-timeout - Using default value: 300
+2025-10-31T11:07:12.7893500Z TRACE:: Config.GetValue(): algorithm-creation-timeout - Using default value: 90
+2025-10-31T11:07:12.7930760Z TRACE:: Config.GetValue(): zip-data-cache-provider - Using default value: 10
+2025-10-31T11:07:12.7936400Z TRACE:: Config.Get(): Configuration key not found. Key: fundamental-data-provider - Using default value: CoarseFundamentalDataProvider
+2025-10-31T11:07:12.7948540Z TRACE:: AlgorithmManager.CreateTokenBucket(): Initializing LeakyBucket: Capacity: 120 RefillAmount: 18 TimeInterval: 1440
+2025-10-31T11:07:12.7952540Z TRACE:: Config.GetValue(): algorithm-manager-time-loop-maximum - Using default value: 20
+2025-10-31T11:07:12.7974190Z TRACE:: Config.GetValue(): downloader-data-update-period - Using default value: 7
+2025-10-31T11:07:12.7989930Z TRACE:: Engine.Run(): Resource limits '0' CPUs. 2147483647 MB RAM.
+2025-10-31T11:07:12.7991600Z TRACE:: TextSubscriptionDataSourceReader.SetCacheSize(): Setting cache size to 71582788 items
+2025-10-31T11:07:13.0875620Z TRACE:: Config.GetValue(): force-exchange-always-open - Using default value: False
+2025-10-31T11:07:13.0878800Z TRACE:: Config.GetValue(): debugging - Using default value: False
+2025-10-31T11:07:13.0887200Z TRACE:: PythonInitializer.Initialize(): start...
+2025-10-31T11:07:13.2332620Z TRACE:: Config.GetValue(): python-additional-paths - Using default value: System.String[]
+2025-10-31T11:07:13.2509180Z TRACE:: PythonInitializer.Initialize(): ended
+2025-10-31T11:07:13.2517570Z TRACE:: AlgorithmPythonWrapper(): Python version 3.11.14 (main, Oct  9 2025, 16:16:55) [Clang 17.0.0 (clang-1700.0.13.3)]: Importing python module rsi_ma_cross
+2025-10-31T11:07:13.2775900Z ERROR:: Loader.TryCreatePythonAlgorithm():  System.Exception: AlgorithmPythonWrapper(): No module named 'AlgorithmImports'
+  at <module>
+    from AlgorithmImports import *  # type: ignore
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ in rsi_ma_cross.py: line 3
+ No module named 'AlgorithmImports'
+   at QuantConnect.AlgorithmFactory.Python.Wrappers.AlgorithmPythonWrapper..ctor(String moduleName) in AlgorithmFactory/Python/Wrappers/AlgorithmPythonWrapper.cs:line 187
+   at QuantConnect.AlgorithmFactory.Loader.TryCreatePythonAlgorithm(String assemblyPath, IAlgorithm& algorithmInstance, String& errorMessage) in AlgorithmFactory/Loader.cs:line 173
+2025-10-31T11:07:13.2787820Z ERROR:: Engine.Run():  QuantConnect.Lean.Engine.Setup.AlgorithmSetupException: During the algorithm initialization, the following exception has occurred: Loader.TryCreatePythonAlgorithm(): Unable to import python module /Users/laurentmarais/Documents/GitHub/quant_conn_algos/rsi_ma_cross.py. AlgorithmPythonWrapper(): No module named 'AlgorithmImports'
+  at <module>
+    from AlgorithmImports import *  # type: ignore
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ in rsi_ma_cross.py: line 3
+ No module named 'AlgorithmImports'
+   at QuantConnect.Lean.Engine.Setup.BacktestingSetupHandler.CreateAlgorithmInstance(AlgorithmNodePacket algorithmNodePacket, String assemblyPath) in Engine/Setup/BacktestingSetupHandler.cs:line 113
+   at QuantConnect.Lean.Engine.Engine.Run(AlgorithmNodePacket job, AlgorithmManager manager, String assemblyPath, WorkerThread workerThread) in Engine/Engine.cs:line 118
+2025-10-31T11:07:13.2790410Z TRACE:: JOB HANDLERS:
+         DataFeed:             QuantConnect.Lean.Engine.DataFeeds.FileSystemDataFeed
+         Setup:                QuantConnect.Lean.Engine.Setup.BacktestingSetupHandler
+         RealTime:             QuantConnect.Lean.Engine.RealTime.BacktestingRealTimeHandler
+         Results:              QuantConnect.Lean.Engine.Results.BacktestingResultHandler
+         Transactions:         QuantConnect.Lean.Engine.TransactionHandlers.BacktestingTransactionHandler
+         Object Store:         QuantConnect.Lean.Engine.Storage.LocalObjectStore
+         History Provider:     
+         Brokerage:            
+         Data Provider:        QuantConnect.Lean.Engine.DataFeeds.DefaultDataProvider
+
+2025-10-31T11:07:13.2793130Z TRACE:: BacktestingResultHandler.Exit(): starting...
+2025-10-31T11:07:13.2795010Z TRACE:: BacktestingResultHandler.Exit(): Saving logs...
+2025-10-31T11:07:13.2801160Z TRACE:: StopSafely(): Waiting for 'Result Thread' thread to stop...
+2025-10-31T11:07:13.2803310Z ERROR:: Algorithm.Initialize() Error: During the algorithm initialization, the following exception has occurred: Loader.TryCreatePythonAlgorithm(): Unable to import python module /Users/laurentmarais/Documents/GitHub/quant_conn_algos/rsi_ma_cross.py. AlgorithmPythonWrapper(): No module named 'AlgorithmImports'
+  at <module>
+    from AlgorithmImports import *  # type: ignore
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ in rsi_ma_cross.py: line 3
+ No module named 'AlgorithmImports' Stack Trace: During the algorithm initialization, the following exception has occurred: Loader.TryCreatePythonAlgorithm(): Unable to import python module /Users/laurentmarais/Documents/GitHub/quant_conn_algos/rsi_ma_cross.py. AlgorithmPythonWrapper(): No module named 'AlgorithmImports'
+  at <module>
+    from AlgorithmImports import *  # type: ignore
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ in rsi_ma_cross.py: line 3
+ No module named 'AlgorithmImports'
+ During the algorithm initialization, the following exception has occurred: Loader.TryCreatePythonAlgorithm(): Unable to import python module /Users/laurentmarais/Documents/GitHub/quant_conn_algos/rsi_ma_cross.py. AlgorithmPythonWrapper(): No module named 'AlgorithmImports'
+  at <module>
+    from AlgorithmImports import *  # type: ignore
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ in rsi_ma_cross.py: line 3
+ No module named 'AlgorithmImports'
+2025-10-31T11:07:13.2803570Z TRACE:: Debug: Your log was successfully created and can be retrieved from: /Users/laurentmarais/Documents/GitHub/quant_conn_algos/results/RsiMaCrossAlgorithm-log.txt
+2025-10-31T11:07:13.2803630Z TRACE:: BacktestingResultHandler.Run(): Ending Thread...
+2025-10-31T11:07:13.2827460Z TRACE:: BacktestingResultHandler.CreateResultSummary(): 'Strategy Equity' chart not found
+2025-10-31T11:07:13.3022590Z TRACE:: 
+STATISTICS:: OrderListHash d41d8cd98f00b204e9800998ecf8427e
+2025-10-31T11:07:13.3022730Z TRACE:: BacktestingResultHandler.SendAnalysisResult(): Processed final packet
+2025-10-31T11:07:13.3023910Z TRACE:: Engine.Run(): Disposing of setup handler...
+2025-10-31T11:07:13.3024090Z TRACE:: Engine.Main(): Analysis Completed and Results Posted.
+2025-10-31T11:07:13.3030080Z TRACE:: Config.GetValue(): close-automatically - Using default value: False
+2025-10-31T11:07:17.1640790Z TRACE:: Engine.Main(): Packet removed from queue: RsiMaCrossAlgorithm
+2025-10-31T11:07:17.1641780Z TRACE:: LeanEngineSystemHandlers.Dispose(): start...
+2025-10-31T11:07:17.1644240Z TRACE:: LeanEngineSystemHandlers.Dispose(): Disposed of system handlers.
+2025-10-31T11:07:17.1645110Z TRACE:: LeanEngineAlgorithmHandlers.Dispose(): start...
+2025-10-31T11:07:17.1647140Z TRACE:: LocalObjectStore.Dispose(): start...
+2025-10-31T11:07:17.1647200Z TRACE:: LocalObjectStore.Dispose(): end
+2025-10-31T11:07:17.1647870Z TRACE:: LeanEngineAlgorithmHandlers.Dispose(): Disposed of algorithm handlers.
+2025-10-31T11:08:04.8974540Z TRACE:: Engine.Main(): LEAN ALGORITHMIC TRADING ENGINE v2.5.0.0 Mode: DEBUG (64bit) Host: MacBook-Pro
+2025-10-31T11:08:04.9069930Z TRACE:: Engine.Main(): Started 1:08 PM
+2025-10-31T11:08:04.9071330Z TRACE:: Config.Get(): Configuration key not found. Key: job-queue-handler - Using default value: QuantConnect.Queues.JobQueue
+2025-10-31T11:08:04.9077910Z TRACE:: Config.Get(): Configuration key not found. Key: api-handler - Using default value: QuantConnect.Api.Api
+2025-10-31T11:08:04.9082100Z TRACE:: Config.Get(): Configuration key not found. Key: messaging-handler - Using default value: QuantConnect.Messaging.Messaging
+2025-10-31T11:08:04.9083280Z TRACE:: Config.Get(): Configuration key not found. Key: lean-manager-type - Using default value: LocalLeanManager
+2025-10-31T11:08:04.9172910Z TRACE:: JobQueue.NextJob(): Selected /Users/laurentmarais/Documents/GitHub/quant_conn_algos/rsi_ma_cross.py
+2025-10-31T11:08:04.9173260Z TRACE:: Config.Get(): Configuration key not found. Key: parameters - Using default value: 
+2025-10-31T11:08:04.9177180Z TRACE:: Config.GetValue(): scheduled-event-leaky-bucket-capacity - Using default value: 120
+2025-10-31T11:08:04.9177290Z TRACE:: Config.GetValue(): scheduled-event-leaky-bucket-time-interval-minutes - Using default value: 1440
+2025-10-31T11:08:04.9177390Z TRACE:: Config.GetValue(): scheduled-event-leaky-bucket-refill-amount - Using default value: 18
+2025-10-31T11:08:04.9178080Z TRACE:: Config.GetValue(): symbol-minute-limit - Using default value: 10000
+2025-10-31T11:08:04.9178160Z TRACE:: Config.GetValue(): symbol-second-limit - Using default value: 10000
+2025-10-31T11:08:04.9178240Z TRACE:: Config.GetValue(): symbol-tick-limit - Using default value: 10000
+2025-10-31T11:08:04.9178310Z TRACE:: Config.GetValue(): maximum-data-points-per-chart-series - Using default value: 1000000
+2025-10-31T11:08:04.9178380Z TRACE:: Config.GetValue(): maximum-chart-series - Using default value: 30
+2025-10-31T11:08:04.9182140Z TRACE:: Config.GetValue(): storage-limit - Using default value: 10737418240
+2025-10-31T11:08:04.9182230Z TRACE:: Config.GetValue(): storage-file-count - Using default value: 10000
+2025-10-31T11:08:04.9188980Z TRACE:: Config.GetValue(): storage-permissions - Using default value: Read=True Write=True Delete=True
+2025-10-31T11:08:04.9189150Z TRACE:: Config.Get(): Configuration key not found. Key: algorithm-id - Using default value: RsiMaCrossAlgorithm
+2025-10-31T11:08:04.9189380Z TRACE:: Config.Get(): Configuration key not found. Key: optimization-id - Using default value: 
+2025-10-31T11:08:04.9189480Z TRACE:: Config.Get(): Configuration key not found. Key: backtest-name - Using default value: local
+2025-10-31T11:08:04.9205170Z TRACE:: Config.Get(): Configuration key not found. Key: data-channel - Using default value: 
+2025-10-31T11:08:04.9206060Z TRACE:: Config.Get(): Configuration key not found. Key: python-venv - Using default value: 
+2025-10-31T11:08:04.9206370Z TRACE:: Config.Get(): Configuration key not found. Key: out-of-sample-max-end-date - Using default value: 
+2025-10-31T11:08:04.9206460Z TRACE:: Config.GetValue(): out-of-sample-days - Using default value: 0
+2025-10-31T11:08:04.9210570Z TRACE:: Config.Get(): Configuration key not found. Key: map-file-provider - Using default value: LocalDiskMapFileProvider
+2025-10-31T11:08:04.9210650Z TRACE:: Config.Get(): Configuration key not found. Key: factor-file-provider - Using default value: LocalDiskFactorFileProvider
+2025-10-31T11:08:04.9210870Z TRACE:: Config.Get(): Configuration key not found. Key: data-provider - Using default value: DefaultDataProvider
+2025-10-31T11:08:04.9210940Z TRACE:: Config.Get(): Configuration key not found. Key: object-store - Using default value: LocalObjectStore
+2025-10-31T11:08:04.9211010Z TRACE:: Config.Get(): Configuration key not found. Key: data-permission-manager - Using default value: DataPermissionManager
+2025-10-31T11:08:04.9211070Z TRACE:: Config.Get(): Configuration key not found. Key: data-monitor - Using default value: QuantConnect.Data.DataMonitor
+2025-10-31T11:08:04.9282350Z TRACE:: Config.GetValue(): initialization-timeout - Using default value: 300
+2025-10-31T11:08:04.9282890Z TRACE:: Config.GetValue(): algorithm-creation-timeout - Using default value: 90
+2025-10-31T11:08:04.9315100Z TRACE:: Config.GetValue(): zip-data-cache-provider - Using default value: 10
+2025-10-31T11:08:04.9318800Z TRACE:: Config.Get(): Configuration key not found. Key: fundamental-data-provider - Using default value: CoarseFundamentalDataProvider
+2025-10-31T11:08:04.9325980Z TRACE:: AlgorithmManager.CreateTokenBucket(): Initializing LeakyBucket: Capacity: 120 RefillAmount: 18 TimeInterval: 1440
+2025-10-31T11:08:04.9329720Z TRACE:: Config.GetValue(): algorithm-manager-time-loop-maximum - Using default value: 20
+2025-10-31T11:08:04.9348520Z TRACE:: Config.GetValue(): downloader-data-update-period - Using default value: 7
+2025-10-31T11:08:04.9364270Z TRACE:: Engine.Run(): Resource limits '0' CPUs. 2147483647 MB RAM.
+2025-10-31T11:08:04.9366140Z TRACE:: TextSubscriptionDataSourceReader.SetCacheSize(): Setting cache size to 71582788 items
+2025-10-31T11:08:05.2127350Z TRACE:: Config.GetValue(): force-exchange-always-open - Using default value: False
+2025-10-31T11:08:05.2130820Z TRACE:: Config.GetValue(): debugging - Using default value: False
+2025-10-31T11:08:05.2139060Z TRACE:: PythonInitializer.Initialize(): start...
+2025-10-31T11:08:05.3792200Z TRACE:: PythonInitializer.Initialize(): ended
+2025-10-31T11:08:05.3798930Z TRACE:: AlgorithmPythonWrapper(): Python version 3.11.14 (main, Oct  9 2025, 16:16:55) [Clang 17.0.0 (clang-1700.0.13.3)]: Importing python module rsi_ma_cross
+2025-10-31T11:08:05.8588060Z TRACE:: AlgorithmPythonWrapper(): rsi_ma_cross successfully imported.
+2025-10-31T11:08:05.8631210Z TRACE:: AlgorithmPythonWrapper(): Creating IAlgorithm instance.
+2025-10-31T11:08:05.8678860Z TRACE:: Config.Get(): Configuration key not found. Key: databases-refresh-period - Using default value: 1.00:00:00
+2025-10-31T11:08:05.8681700Z TRACE:: Config.GetValue(): ignore-unknown-asset-holdings - Using default value: True
+2025-10-31T11:08:05.9245060Z ERROR:: Loader.TryCreatePythonAlgorithm():  System.Exception: AlgorithmPythonWrapper(): The type initializer for 'QuantConnect.Python.PandasConverter' threw an exception. in AlgorithmPythonWrapper.cs:line 122 The type initializer for 'QuantConnect.Python.PandasConverter' threw an exception.
+   at QuantConnect.AlgorithmFactory.Python.Wrappers.AlgorithmPythonWrapper..ctor(String moduleName) in AlgorithmFactory/Python/Wrappers/AlgorithmPythonWrapper.cs:line 187
+   at QuantConnect.AlgorithmFactory.Loader.TryCreatePythonAlgorithm(String assemblyPath, IAlgorithm& algorithmInstance, String& errorMessage) in AlgorithmFactory/Loader.cs:line 173
+2025-10-31T11:08:05.9265600Z ERROR:: Engine.Run():  QuantConnect.Lean.Engine.Setup.AlgorithmSetupException: During the algorithm initialization, the following exception has occurred: Loader.TryCreatePythonAlgorithm(): Unable to import python module /Users/laurentmarais/Documents/GitHub/quant_conn_algos/rsi_ma_cross.py. AlgorithmPythonWrapper(): The type initializer for 'QuantConnect.Python.PandasConverter' threw an exception. in AlgorithmPythonWrapper.cs:line 122 The type initializer for 'QuantConnect.Python.PandasConverter' threw an exception.
+   at QuantConnect.Lean.Engine.Setup.BacktestingSetupHandler.CreateAlgorithmInstance(AlgorithmNodePacket algorithmNodePacket, String assemblyPath) in Engine/Setup/BacktestingSetupHandler.cs:line 113
+   at QuantConnect.Lean.Engine.Engine.Run(AlgorithmNodePacket job, AlgorithmManager manager, String assemblyPath, WorkerThread workerThread) in Engine/Engine.cs:line 118
+2025-10-31T11:08:05.9268580Z TRACE:: JOB HANDLERS:
+         DataFeed:             QuantConnect.Lean.Engine.DataFeeds.FileSystemDataFeed
+         Setup:                QuantConnect.Lean.Engine.Setup.BacktestingSetupHandler
+         RealTime:             QuantConnect.Lean.Engine.RealTime.BacktestingRealTimeHandler
+         Results:              QuantConnect.Lean.Engine.Results.BacktestingResultHandler
+         Transactions:         QuantConnect.Lean.Engine.TransactionHandlers.BacktestingTransactionHandler
+         Object Store:         QuantConnect.Lean.Engine.Storage.LocalObjectStore
+         History Provider:     
+         Brokerage:            
+         Data Provider:        QuantConnect.Lean.Engine.DataFeeds.DefaultDataProvider
+
+2025-10-31T11:08:05.9271880Z TRACE:: BacktestingResultHandler.Exit(): starting...
+2025-10-31T11:08:05.9274900Z TRACE:: BacktestingResultHandler.Exit(): Saving logs...
+2025-10-31T11:08:05.9282410Z TRACE:: StopSafely(): Waiting for 'Result Thread' thread to stop...
+2025-10-31T11:08:05.9285160Z ERROR:: Algorithm.Initialize() Error: During the algorithm initialization, the following exception has occurred: Loader.TryCreatePythonAlgorithm(): Unable to import python module /Users/laurentmarais/Documents/GitHub/quant_conn_algos/rsi_ma_cross.py. AlgorithmPythonWrapper(): The type initializer for 'QuantConnect.Python.PandasConverter' threw an exception. in AlgorithmPythonWrapper.cs:line 122 The type initializer for 'QuantConnect.Python.PandasConverter' threw an exception. Stack Trace: During the algorithm initialization, the following exception has occurred: Loader.TryCreatePythonAlgorithm(): Unable to import python module /Users/laurentmarais/Documents/GitHub/quant_conn_algos/rsi_ma_cross.py. AlgorithmPythonWrapper(): The type initializer for 'QuantConnect.Python.PandasConverter' threw an exception. in AlgorithmPythonWrapper.cs:line 122 The type initializer for 'QuantConnect.Python.PandasConverter' threw an exception.
+ During the algorithm initialization, the following exception has occurred: Loader.TryCreatePythonAlgorithm(): Unable to import python module /Users/laurentmarais/Documents/GitHub/quant_conn_algos/rsi_ma_cross.py. AlgorithmPythonWrapper(): The type initializer for 'QuantConnect.Python.PandasConverter' threw an exception. in AlgorithmPythonWrapper.cs:line 122 The type initializer for 'QuantConnect.Python.PandasConverter' threw an exception.
+2025-10-31T11:08:05.9285480Z TRACE:: Debug: Your log was successfully created and can be retrieved from: /Users/laurentmarais/Documents/GitHub/quant_conn_algos/results/RsiMaCrossAlgorithm-log.txt
+2025-10-31T11:08:05.9285560Z TRACE:: BacktestingResultHandler.Run(): Ending Thread...
+2025-10-31T11:08:05.9309360Z TRACE:: BacktestingResultHandler.CreateResultSummary(): 'Strategy Equity' chart not found
+2025-10-31T11:08:05.9517990Z TRACE:: 
+STATISTICS:: OrderListHash d41d8cd98f00b204e9800998ecf8427e
+2025-10-31T11:08:05.9518240Z TRACE:: BacktestingResultHandler.SendAnalysisResult(): Processed final packet
+2025-10-31T11:08:05.9519540Z TRACE:: Engine.Run(): Disposing of setup handler...
+2025-10-31T11:08:05.9519750Z TRACE:: Engine.Main(): Analysis Completed and Results Posted.
+2025-10-31T11:08:05.9524900Z TRACE:: Config.GetValue(): close-automatically - Using default value: False
+2025-10-31T11:08:08.5508220Z TRACE:: Engine.Main(): Packet removed from queue: RsiMaCrossAlgorithm
+2025-10-31T11:08:08.5509160Z TRACE:: LeanEngineSystemHandlers.Dispose(): start...
+2025-10-31T11:08:08.5511200Z TRACE:: LeanEngineSystemHandlers.Dispose(): Disposed of system handlers.
+2025-10-31T11:08:08.5512080Z TRACE:: LeanEngineAlgorithmHandlers.Dispose(): start...
+2025-10-31T11:08:08.5514510Z TRACE:: LocalObjectStore.Dispose(): start...
+2025-10-31T11:08:08.5514610Z TRACE:: LocalObjectStore.Dispose(): end
+2025-10-31T11:08:08.5515380Z TRACE:: LeanEngineAlgorithmHandlers.Dispose(): Disposed of algorithm handlers.
+2025-10-31T11:09:00.0060210Z TRACE:: Engine.Main(): LEAN ALGORITHMIC TRADING ENGINE v2.5.0.0 Mode: DEBUG (64bit) Host: MacBook-Pro
+2025-10-31T11:09:00.0161030Z TRACE:: Engine.Main(): Started 1:09 PM
+2025-10-31T11:09:00.0162600Z TRACE:: Config.Get(): Configuration key not found. Key: job-queue-handler - Using default value: QuantConnect.Queues.JobQueue
+2025-10-31T11:09:00.0168300Z TRACE:: Config.Get(): Configuration key not found. Key: api-handler - Using default value: QuantConnect.Api.Api
+2025-10-31T11:09:00.0173440Z TRACE:: Config.Get(): Configuration key not found. Key: messaging-handler - Using default value: QuantConnect.Messaging.Messaging
+2025-10-31T11:09:00.0175350Z TRACE:: Config.Get(): Configuration key not found. Key: lean-manager-type - Using default value: LocalLeanManager
+2025-10-31T11:09:00.0276300Z TRACE:: JobQueue.NextJob(): Selected /Users/laurentmarais/Documents/GitHub/quant_conn_algos/rsi_ma_cross.py
+2025-10-31T11:09:00.0276850Z TRACE:: Config.Get(): Configuration key not found. Key: parameters - Using default value: 
+2025-10-31T11:09:00.0284680Z TRACE:: Config.GetValue(): scheduled-event-leaky-bucket-capacity - Using default value: 120
+2025-10-31T11:09:00.0284840Z TRACE:: Config.GetValue(): scheduled-event-leaky-bucket-time-interval-minutes - Using default value: 1440
+2025-10-31T11:09:00.0284940Z TRACE:: Config.GetValue(): scheduled-event-leaky-bucket-refill-amount - Using default value: 18
+2025-10-31T11:09:00.0285650Z TRACE:: Config.GetValue(): symbol-minute-limit - Using default value: 10000
+2025-10-31T11:09:00.0285740Z TRACE:: Config.GetValue(): symbol-second-limit - Using default value: 10000
+2025-10-31T11:09:00.0285810Z TRACE:: Config.GetValue(): symbol-tick-limit - Using default value: 10000
+2025-10-31T11:09:00.0285890Z TRACE:: Config.GetValue(): maximum-data-points-per-chart-series - Using default value: 1000000
+2025-10-31T11:09:00.0285960Z TRACE:: Config.GetValue(): maximum-chart-series - Using default value: 30
+2025-10-31T11:09:00.0289850Z TRACE:: Config.GetValue(): storage-limit - Using default value: 10737418240
+2025-10-31T11:09:00.0289930Z TRACE:: Config.GetValue(): storage-file-count - Using default value: 10000
+2025-10-31T11:09:00.0293910Z TRACE:: Config.GetValue(): storage-permissions - Using default value: Read=True Write=True Delete=True
+2025-10-31T11:09:00.0293990Z TRACE:: Config.Get(): Configuration key not found. Key: algorithm-id - Using default value: RsiMaCrossAlgorithm
+2025-10-31T11:09:00.0294190Z TRACE:: Config.Get(): Configuration key not found. Key: optimization-id - Using default value: 
+2025-10-31T11:09:00.0294260Z TRACE:: Config.Get(): Configuration key not found. Key: backtest-name - Using default value: local
+2025-10-31T11:09:00.0307740Z TRACE:: Config.Get(): Configuration key not found. Key: data-channel - Using default value: 
+2025-10-31T11:09:00.0308540Z TRACE:: Config.Get(): Configuration key not found. Key: python-venv - Using default value: 
+2025-10-31T11:09:00.0308840Z TRACE:: Config.Get(): Configuration key not found. Key: out-of-sample-max-end-date - Using default value: 
+2025-10-31T11:09:00.0308920Z TRACE:: Config.GetValue(): out-of-sample-days - Using default value: 0
+2025-10-31T11:09:00.0312860Z TRACE:: Config.Get(): Configuration key not found. Key: map-file-provider - Using default value: LocalDiskMapFileProvider
+2025-10-31T11:09:00.0312940Z TRACE:: Config.Get(): Configuration key not found. Key: factor-file-provider - Using default value: LocalDiskFactorFileProvider
+2025-10-31T11:09:00.0313000Z TRACE:: Config.Get(): Configuration key not found. Key: data-provider - Using default value: DefaultDataProvider
+2025-10-31T11:09:00.0313070Z TRACE:: Config.Get(): Configuration key not found. Key: object-store - Using default value: LocalObjectStore
+2025-10-31T11:09:00.0313140Z TRACE:: Config.Get(): Configuration key not found. Key: data-permission-manager - Using default value: DataPermissionManager
+2025-10-31T11:09:00.0313200Z TRACE:: Config.Get(): Configuration key not found. Key: data-monitor - Using default value: QuantConnect.Data.DataMonitor
+2025-10-31T11:09:00.0375470Z TRACE:: Config.GetValue(): initialization-timeout - Using default value: 300
+2025-10-31T11:09:00.0375920Z TRACE:: Config.GetValue(): algorithm-creation-timeout - Using default value: 90
+2025-10-31T11:09:00.0410730Z TRACE:: Config.GetValue(): zip-data-cache-provider - Using default value: 10
+2025-10-31T11:09:00.0415850Z TRACE:: Config.Get(): Configuration key not found. Key: fundamental-data-provider - Using default value: CoarseFundamentalDataProvider
+2025-10-31T11:09:00.0423560Z TRACE:: AlgorithmManager.CreateTokenBucket(): Initializing LeakyBucket: Capacity: 120 RefillAmount: 18 TimeInterval: 1440
+2025-10-31T11:09:00.0427590Z TRACE:: Config.GetValue(): algorithm-manager-time-loop-maximum - Using default value: 20
+2025-10-31T11:09:00.0451600Z TRACE:: Config.GetValue(): downloader-data-update-period - Using default value: 7
+2025-10-31T11:09:00.0469470Z TRACE:: Engine.Run(): Resource limits '0' CPUs. 2147483647 MB RAM.
+2025-10-31T11:09:00.0471170Z TRACE:: TextSubscriptionDataSourceReader.SetCacheSize(): Setting cache size to 71582788 items
+2025-10-31T11:09:00.3217170Z TRACE:: Config.GetValue(): force-exchange-always-open - Using default value: False
+2025-10-31T11:09:00.3220530Z TRACE:: Config.GetValue(): debugging - Using default value: False
+2025-10-31T11:09:00.3228450Z TRACE:: PythonInitializer.Initialize(): start...
+2025-10-31T11:09:00.4835870Z TRACE:: PythonInitializer.Initialize(): ended
+2025-10-31T11:09:00.4844980Z TRACE:: AlgorithmPythonWrapper(): Python version 3.11.14 (main, Oct  9 2025, 16:16:55) [Clang 17.0.0 (clang-1700.0.13.3)]: Importing python module rsi_ma_cross
+2025-10-31T11:09:30.2974640Z TRACE:: AlgorithmPythonWrapper(): rsi_ma_cross successfully imported.
+2025-10-31T11:09:30.3019070Z TRACE:: AlgorithmPythonWrapper(): Creating IAlgorithm instance.
+2025-10-31T11:09:30.3073420Z TRACE:: Config.Get(): Configuration key not found. Key: databases-refresh-period - Using default value: 1.00:00:00
+2025-10-31T11:09:30.3075850Z TRACE:: Config.GetValue(): ignore-unknown-asset-holdings - Using default value: True
+2025-10-31T11:09:30.3554390Z TRACE:: Config.GetValue(): mute-python-library-logging - Using default value: True
+2025-10-31T11:09:30.3561650Z TRACE:: Config.Get(): Configuration key not found. Key: object-store-root - Using default value: ./storage
+2025-10-31T11:09:30.3573230Z TRACE:: LocalObjectStore.Initialize(): Storage Root: /Users/laurentmarais/Documents/GitHub/quant_conn_algos/storage. StorageFileCount 10000. StorageLimit 10240MB. StoragePermissions Read=True Write=True Delete=True
+2025-10-31T11:09:30.3602540Z TRACE:: Config.GetValue(): zip-data-cache-provider - Using default value: 10
+2025-10-31T11:09:30.3623960Z TRACE:: HistoryProviderManager.Initialize(): history providers [SubscriptionDataReaderHistoryProvider]
+2025-10-31T11:09:30.3640350Z TRACE:: BaseSetupHandler.Setup(LocalPlatform): UID: 0, PID: 0, Version: 2.5.0.0, Source: WebIDE
+2025-10-31T11:09:30.3652950Z TRACE:: Config.Get(): Configuration key not found. Key: security-data-feeds - Using default value: 
+2025-10-31T11:09:30.3887420Z TRACE:: Config.Get(): Configuration key not found. Key: reserved-words-prefix - Using default value: @
+2025-10-31T11:09:30.4362820Z TRACE:: BaseSetupHandler.SetupCurrencyConversions():
+Account Type: Margin
+
+Symbol      Quantity    Conversion = Value in USD
+USD: $      100000.00 @       1.00 = $100000
+-------------------------------------------------
+CashBook Total Value:                $100000
+
+2025-10-31T11:09:30.4371420Z TRACE:: Total margin information: TotalMarginUsed: 0.00, MarginRemaining: 100000.00
+2025-10-31T11:09:30.4372640Z TRACE:: SetUp Backtesting: User: 0 ProjectId: 0 AlgoId: RsiMaCrossAlgorithm
+2025-10-31T11:09:30.4379070Z TRACE:: Dates: Start: 01/01/2018 End: 01/01/2020 Cash: ¤100,000.00 MaximumRuntime: 100.00:00:00 MaxOrders: 2147483647
+2025-10-31T11:09:30.4395350Z TRACE:: BacktestingResultHandler(): Sample Period Set: 263.16
+2025-10-31T11:09:30.4396610Z TRACE:: Config.GetValue(): forward-console-messages - Using default value: True
+2025-10-31T11:09:30.4397530Z TRACE:: JOB HANDLERS:
+         DataFeed:             QuantConnect.Lean.Engine.DataFeeds.FileSystemDataFeed
+         Setup:                QuantConnect.Lean.Engine.Setup.BacktestingSetupHandler
+         RealTime:             QuantConnect.Lean.Engine.RealTime.BacktestingRealTimeHandler
+         Results:              QuantConnect.Lean.Engine.Results.BacktestingResultHandler
+         Transactions:         QuantConnect.Lean.Engine.TransactionHandlers.BacktestingTransactionHandler
+         Object Store:         QuantConnect.Lean.Engine.Storage.LocalObjectStore
+         History Provider:     QuantConnect.Lean.Engine.HistoricalData.HistoryProviderManager
+         Brokerage:            QuantConnect.Brokerages.Backtesting.BacktestingBrokerage
+         Data Provider:        QuantConnect.Lean.Engine.DataFeeds.DefaultDataProvider
+
+2025-10-31T11:09:30.4458850Z TRACE:: Event Name "Daily Sampling", scheduled to run.
+2025-10-31T11:09:30.4463740Z TRACE:: AlgorithmManager.Run(): Begin DataStream - Start: 1/1/2018 12:00:00 AM Stop: 1/1/2020 11:59:59 PM Time: 10/31/2017 12:00:00 AM Warmup: True
+2025-10-31T11:09:30.4597540Z TRACE:: Config.GetValue(): data-feed-workers-count - Using default value: 8
+2025-10-31T11:09:30.4599590Z TRACE:: Config.GetValue(): data-feed-max-work-weight - Using default value: 400
+2025-10-31T11:09:30.4600120Z TRACE:: WeightedWorkScheduler(): will use 8 workers and MaxWorkWeight is 400
+2025-10-31T11:09:30.4687510Z TRACE:: Config.GetValue(): show-missing-data-logs - Using default value: False
+2025-10-31T11:09:30.4998070Z TRACE:: UniverseSelection.AddPendingInternalDataFeeds(): Adding internal benchmark data feed SPY,#0,SPY,Hour,TradeBar,Trade,Adjusted,OpenInterest,Internal
+2025-10-31T11:09:30.5110710Z TRACE:: Debug: Launching analysis for RsiMaCrossAlgorithm with LEAN Engine v2.5.0.0
+2025-10-31T11:09:30.5761000Z TRACE:: AlgorithmManager.Stream(): Subscriptions count before warm up: 3
+2025-10-31T11:09:30.6045350Z TRACE:: AlgorithmManager.Run(): 12/15/2017 12:00:00 AM: Skip Dividend during warmup: Dividend: SPY: 1.36 | 265.66
+2025-10-31T11:09:30.6066520Z TRACE:: AlgorithmManager.Stream(): Subscriptions count after warm up: 3
+2025-10-31T11:09:30.6114120Z TRACE:: Debug: Accurate daily end-times now enabled by default. See more at https://qnt.co/3YHaWHL. To disable it and use legacy daily bars set self.settings.daily_precise_end_time = False.
+2025-10-31T11:09:30.6114290Z TRACE:: Debug: Algorithm starting warm up...
+2025-10-31T11:09:30.6114390Z TRACE:: Debug: Algorithm finished warming up.
+2025-10-31T11:09:30.6428910Z TRACE:: Config.GetValue(): portfolio-margin-series-count - Using default value: 40
+2025-10-31T11:09:30.6624900Z TRACE:: Debug: Warning: all market orders sent using daily data, or market orders sent after hours are automatically converted into MarketOnOpen orders.
+2025-10-31T11:09:30.7544000Z TRACE:: Synchronizer.GetEnumerator(): Exited thread.
+2025-10-31T11:09:30.7547180Z TRACE:: AlgorithmManager.Run(): Firing On End Of Algorithm...
+2025-10-31T11:09:30.7549990Z TRACE:: Engine.Run(): Exiting Algorithm Manager
+2025-10-31T11:09:30.7550900Z TRACE:: Config.Get(): Configuration key not found. Key: transaction-log - Using default value: 
+2025-10-31T11:09:30.7566620Z TRACE:: StopSafely(): Waiting for 'Isolator Thread' thread to stop...
+2025-10-31T11:09:30.7568080Z TRACE:: FileSystemDataFeed.Exit(): Start. Setting cancellation token...
+2025-10-31T11:09:30.7572980Z TRACE:: FileSystemDataFeed.Exit(): Exit Finished.
+2025-10-31T11:09:30.7573900Z TRACE:: BacktestingResultHandler.Exit(): starting...
+2025-10-31T11:09:30.7576780Z TRACE:: BacktestingResultHandler.Exit(): Saving logs...
+2025-10-31T11:09:30.7584250Z TRACE:: Debug: Algorithm Id:(RsiMaCrossAlgorithm) completed in 0.31 seconds at 14k data points per second. Processing total of 4,356 data points.
+2025-10-31T11:09:30.7584330Z TRACE:: StopSafely(): Waiting for 'Result Thread' thread to stop...
+2025-10-31T11:09:30.7584360Z TRACE:: Debug: Your log was successfully created and can be retrieved from: /Users/laurentmarais/Documents/GitHub/quant_conn_algos/results/RsiMaCrossAlgorithm-log.txt
+2025-10-31T11:09:30.7584500Z TRACE:: BacktestingResultHandler.Run(): Ending Thread...
+2025-10-31T11:09:30.9197960Z TRACE:: 
+STATISTICS:: Total Orders 89
+STATISTICS:: Average Win 0.91%
+STATISTICS:: Average Loss -2.10%
+STATISTICS:: Compounding Annual Return -4.242%
+STATISTICS:: Drawdown 21.000%
+STATISTICS:: Expectancy -0.088
+STATISTICS:: Start Equity 100000
+STATISTICS:: End Equity 91700.38
+STATISTICS:: Net Profit -8.300%
+STATISTICS:: Sharpe Ratio -0.516
+STATISTICS:: Sortino Ratio -0.379
+STATISTICS:: Probabilistic Sharpe Ratio 1.602%
+STATISTICS:: Loss Rate 36%
+STATISTICS:: Win Rate 64%
+STATISTICS:: Profit-Loss Ratio 0.43
+STATISTICS:: Alpha -0.09
+STATISTICS:: Beta 0.616
+STATISTICS:: Annual Standard Deviation 0.098
+STATISTICS:: Annual Variance 0.01
+STATISTICS:: Information Ratio -1.464
+STATISTICS:: Tracking Error 0.078
+STATISTICS:: Treynor Ratio -0.082
+STATISTICS:: Total Fees $148.96
+STATISTICS:: Estimated Strategy Capacity $1300000000.00
+STATISTICS:: Lowest Capacity Asset SPY R735QTJ8XC9X
+STATISTICS:: Portfolio Turnover 12.17%
+STATISTICS:: Drawdown Recovery 1
+STATISTICS:: OrderListHash adc68582879f9097c14ea0d32bc8d499
+2025-10-31T11:09:30.9198150Z TRACE:: BacktestingResultHandler.SendAnalysisResult(): Processed final packet
+2025-10-31T11:09:30.9199370Z TRACE:: Engine.Run(): Disconnecting from brokerage...
+2025-10-31T11:09:30.9199720Z TRACE:: Engine.Run(): Disposing of setup handler...
+2025-10-31T11:09:30.9199870Z TRACE:: Engine.Main(): Analysis Completed and Results Posted.
+2025-10-31T11:09:30.9200830Z TRACE:: DataMonitor.Exit(): start...
+2025-10-31T11:09:30.9200950Z TRACE:: StopSafely(): Waiting for '' thread to stop...
+2025-10-31T11:09:30.9207760Z TRACE:: DataMonitor.GenerateReport():
+DATA USAGE:: Total data requests 3
+DATA USAGE:: Succeeded data requests 3
+DATA USAGE:: Failed data requests 0
+DATA USAGE:: Failed data requests percentage 0%
+DATA USAGE:: Total universe data requests 0
+DATA USAGE:: Succeeded universe data requests 0
+DATA USAGE:: Failed universe data requests 0
+DATA USAGE:: Failed universe data requests percentage 0%
+2025-10-31T11:09:30.9219160Z TRACE:: DataMonitor.Exit(): end
+2025-10-31T11:09:30.9232440Z TRACE:: Config.GetValue(): close-automatically - Using default value: False
+2025-10-31T11:09:42.8576230Z TRACE:: Engine.Main(): Packet removed from queue: RsiMaCrossAlgorithm
+2025-10-31T11:09:42.8579550Z TRACE:: LeanEngineSystemHandlers.Dispose(): start...
+2025-10-31T11:09:42.8586330Z TRACE:: LeanEngineSystemHandlers.Dispose(): Disposed of system handlers.
+2025-10-31T11:09:42.8589380Z TRACE:: LeanEngineAlgorithmHandlers.Dispose(): start...
+2025-10-31T11:09:42.8592090Z TRACE:: LocalObjectStore.Dispose(): start...
+2025-10-31T11:09:42.8592630Z TRACE:: LocalObjectStore.Dispose(): end
+2025-10-31T11:09:42.8594840Z TRACE:: LeanEngineAlgorithmHandlers.Dispose(): Disposed of algorithm handlers.

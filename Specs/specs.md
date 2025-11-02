@@ -1,0 +1,81 @@
+System Overview
+---------------
+- Goal: Provide a TradingView-style web UI that can run Lean algorithms on-demand, visualize results (candles, indicators, trades, equity), and browse arbitrary market data.
+- Tech Stack (planned):
+  - Frontend: React (Vite) + lightweight-charts (or similar) for OHLC/indicator rendering.
+  - Backend: Python FastAPI (candidate) orchestrating Lean CLI runs, data processing, and REST endpoints.
+  - Lean artifacts: existing strategy `rsi_ma_cross.py`, `lean-config.json`, backtest outputs under `results/`.
+
+Feature Requirements
+--------------------
+1. Algorithm Selection
+	- Present list of available Lean algorithms with metadata (id, title, description, default params).
+	- Allow user to launch backtests with chosen algorithm.
+
+2. Parameter Controls
+	- Inputs: symbol (text with autocomplete), timeframe (daily, minute, etc.), optional start/end dates.
+	- Support algorithm-specific overrides (e.g., RSI period) via dynamic form.
+
+3. Backtest Execution UX
+	- User submits run → backend kicks off Lean CLI, returns job id.
+	- UI shows queued/running/completed status with progress indicator.
+	- When complete, load charts/trades/statistics into UI.
+
+4. Charting & Visualization
+	- Primary candle chart with price, overlay indicators, and entry/exit markers.
+	- Secondary panes/tabs: equity curve, drawdown, RSI panel, trades table, metrics summary.
+	- Timeframe controls synced across charts.
+
+5. Market Data Explorer
+	- Users can view price charts for any supported symbol/timeframe without running a backtest.
+	- Backend serves OHLCV slices from Lean data directory (zip/CSV) or cached requests.
+
+6. Indicator Support
+	- Base indicators: RSI, SMA of RSI (existing), plus extension hooks for future overlays/oscillators.
+
+Backend Responsibilities
+------------------------
+- Maintain algorithm manifest (JSON/YAML) describing each strategy and its parameters.
+- Translate UI requests into Lean config overrides, launch `lean backtest`, capture output JSON.
+- Normalize Lean result JSON to frontend-friendly schema (charts, orders, stats, parameters used).
+- Provide REST endpoints:
+  - `GET /algorithms`
+  - `POST /backtests`
+  - `GET /backtests/{id}` for status/results
+  - `GET /market-data?symbol=...&timeframe=...` for candles
+
+Data Sources
+------------
+- Lean data: `../Lean/Data/equity/usa/daily/spy.zip` (already exported sample to `results/spy_daily_2016_2020.json`).
+- Backtest results: `results/RsiMaCrossAlgorithm*.json` (charts, orders, statistics).
+
+Completed Work
+--------------
+- Export utility `scripts/export_spy_daily.py` generates SPY OHLCV JSON for rapid UI prototyping.
+- React frontend in `ui/` delivers the algorithm picker, timeframe controls, tabbed views, and placeholder visualizations.
+- Requirement documentation housed in `Specs/` keeps product scope aligned across teams.
+- FastAPI backend stub (`backend/app.py`) exposes `/algorithms`, `/backtests`, and `/market-data`, queueing jobs asynchronously and returning sample outputs.
+- Automated smoke test (FastAPI `TestClient`) validates job lifecycle and market data endpoints.
+
+Architecture Diagram
+--------------------
+```mermaid
+flowchart LR
+	user((User)) --> ui[React UI (Vite)]
+	ui -->|REST calls| backend[FastAPI Backend]
+	backend -->|manifest lookup| manifest[(Algorithm Manifest)]
+	backend -->|spawn job| lean[Lean CLI Runner]
+	lean --> results[(Backtest Results JSON)]
+	backend -->|normalize charts & trades| results
+	backend -->|read candles| data[(Lean Data Files)]
+	backend -->|API responses| ui
+	ui --> charts[[Charts & Tables]]
+```
+
+Outstanding Work
+----------------
+1. Evolve backend stub into a Lean job runner (spawn CLI, capture artifacts, persist job state/results).
+2. Integrate Lean result normalization so charts, trades, and metrics map to frontend schemas.
+3. Replace mock data in the React app with live API responses once Lean integration is ready.
+4. Add automated tests covering backend orchestration, data transformation, and frontend API adapters.
+5. Integrate a production-grade charting library (e.g., lightweight-charts) wired to backend candle/indicator feeds.
