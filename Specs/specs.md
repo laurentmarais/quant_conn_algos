@@ -58,6 +58,10 @@ Completed Work
 - React UI consumes live Lean backtest payloads (candles, trades, orders) and renders them in-tab tables while polling job status.
 - Automated smoke test (FastAPI `TestClient`) validates job lifecycle and market data endpoints.
 - Local dev runbook validated: installed missing `uvicorn`/FastAPI dependencies, confirmed backend live on `http://127.0.0.1:8000`, and brought up the Vite UI server on `http://localhost:5173/`.
+- Backend pytest suite (`backend/tests/test_app.py`) covers service endpoints plus the JSON normalization helpers (price series, orders, indicators, trades) to protect core logic.
+- Added orchestration tests that mock Lean execution to exercise `_run_backtest_job` success/error paths without invoking Dotnet, ensuring job state transitions stay healthy.
+- UI contract tests (`ui/src/api/client.test.js`) run with Vitest to assert REST client semantics and error handling against the backend payload schema.
+- Cleaned up stale pip metadata (`~ip-25.2.dist-info`) so dependency installs no longer raise "invalid distribution" warnings.
 
 Architecture Diagram
 --------------------
@@ -78,7 +82,8 @@ Outstanding Work
 ----------------
 1. Surface additional analytics (drawdown series, benchmark comparison, order P&L) that the UI will eventually visualize.
 2. Persist recent backtest runs and expose a job history view within the UI.
-3. Add automated tests covering backend orchestration, data transformation, frontend API adapters, and include integration smoke tests that hit the FastAPI endpoints plus UI ↔ backend contract tests.
+3. Expand automated coverage to include frontend component/unit tests (post-charting) and an end-to-end harness that drives the UI against the live FastAPI dev server.
 4. Integrate a production-grade charting library (e.g., lightweight-charts) wired to backend candle/indicator feeds.
-5. Document the validated backend/UI startup runbook, monitor the lingering pip distribution warnings, and ensure future environment bootstrap pulls in FastAPI/Uvicorn out of the box.
-6. Perform manual end-to-end QA after each iteration (launch UI at `http://localhost:5173/`, trigger a Lean backtest, verify tables/charts) until automated coverage is in place.
+5. Document the validated backend/UI startup runbook and ensure future environment bootstrap pulls in FastAPI/Uvicorn out of the box.
+6. Tackle npm audit issues (five moderate vulnerabilities flagged) or document acceptable risk/mitigations.
+7. Perform manual end-to-end QA after each iteration (launch UI at `http://localhost:5173/`, trigger a Lean backtest, verify tables/charts) until automated coverage is in place.
