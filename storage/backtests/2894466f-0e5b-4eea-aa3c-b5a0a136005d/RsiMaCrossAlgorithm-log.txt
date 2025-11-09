@@ -1,0 +1,5 @@
+2016-12-30 14:30:00 Launching analysis for RsiMaCrossAlgorithm with LEAN Engine v2.5.0.0
+2016-12-30 14:30:00 Accurate daily end-times now enabled by default. See more at https://qnt.co/3YHaWHL. To disable it and use legacy daily bars set self.settings.daily_precise_end_time = False.
+2016-12-30 14:30:00 Algorithm starting warm up...
+2017-01-04 10:00:00 Algorithm finished warming up.
+2020-12-31 16:00:00 Algorithm Id:(RsiMaCrossAlgorithm) completed in 1.81 seconds at 4k data points per second. Processing total of 7,050 data points.

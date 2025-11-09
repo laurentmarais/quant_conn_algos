@@ -201,14 +201,19 @@ function App() {
     }
   }
 
-  async function pollBacktest(jobId, attempts = 8, delayMs = 400) {
-    for (let attempt = 0; attempt < attempts; attempt += 1) {
+  async function pollBacktest(jobId, { intervalMs = 1000, maxAttempts = 90 } = {}) {
+    for (let attempt = 0; attempt < maxAttempts; attempt += 1) {
       const job = await getBacktest(jobId)
       if (!job?.status || job.status === 'completed') {
         return job
       }
-      await new Promise((resolve) => setTimeout(resolve, delayMs))
+      if (job.status === 'failed') {
+        const message = job?.error || 'Backtest failed'
+        throw new Error(message)
+      }
+      await new Promise((resolve) => setTimeout(resolve, intervalMs))
     }
+
     throw new Error('Timed out waiting for backtest to finish')
   }
 

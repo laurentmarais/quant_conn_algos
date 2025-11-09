@@ -1,0 +1,38 @@
+{
+  "environment": "backtesting",
+  "algorithm-type-name": "RsiMaCrossAlgorithm",
+  "algorithm-language": "Python",
+  "algorithm-location": "/Users/laurentmarais/Documents/GitHub/quant_conn_algos/trend_follow_ema.py",
+  "data-folder": "/Users/laurentmarais/Documents/GitHub/Lean/Data/",
+  "results-destination-folder": "/Users/laurentmarais/Documents/GitHub/quant_conn_algos/storage/backtests/2894466f-0e5b-4eea-aa3c-b5a0a136005d",
+  "python-additional-paths": [
+    "/Users/laurentmarais/Documents/GitHub/Lean/Common",
+    "/Users/laurentmarais/Documents/GitHub/Lean/Launcher/bin/Debug"
+  ],
+  "environments": {
+    "backtesting": {
+      "live-mode": false,
+      "setup-handler": "QuantConnect.Lean.Engine.Setup.BacktestingSetupHandler",
+      "result-handler": "QuantConnect.Lean.Engine.Results.BacktestingResultHandler",
+      "data-feed-handler": "QuantConnect.Lean.Engine.DataFeeds.FileSystemDataFeed",
+      "real-time-handler": "QuantConnect.Lean.Engine.RealTime.BacktestingRealTimeHandler",
+      "history-provider": [
+        "QuantConnect.Lean.Engine.HistoricalData.SubscriptionDataReaderHistoryProvider"
+      ],
+      "transaction-handler": "QuantConnect.Lean.Engine.TransactionHandlers.BacktestingTransactionHandler"
+    }
+  },
+  "close-automatically": true,
+  "start-date": "2017-01-01",
+  "end-date": "2021-01-01",
+  "parameters": {
+    "fastPeriod": "12",
+    "slowPeriod": "30",
+    "atrPeriod": "14",
+    "atrMultiplier": "2.5",
+    "rsiPeriod": "14",
+    "exposure": "0.9",
+    "symbol": "SPY",
+    "timeframe": "15m"
+  }
+}

@@ -103,8 +103,28 @@ export default function TimeSeriesChart({
 
   useEffect(() => {
     if (!seriesRef.current) return
-    const formatted = (data ?? []).map((point) => ({ time: point.time, value: point.value }))
-    seriesRef.current.setData(formatted)
+
+    const normalized = new Map()
+    for (const point of data ?? []) {
+      if (!point?.time) {
+        continue
+      }
+      normalized.set(point.time, {
+        time: point.time,
+        value: Number(point.value ?? 0),
+      })
+    }
+
+    const sorted = Array.from(normalized.values()).sort((a, b) => {
+      const aTime = a.time
+      const bTime = b.time
+      if (typeof aTime === 'string' && typeof bTime === 'string') {
+        return aTime.localeCompare(bTime)
+      }
+      return Number(aTime) - Number(bTime)
+    })
+
+    seriesRef.current.setData(sorted)
     seriesRef.current.setMarkers(markers && markers.length ? markers : [])
     chartRef.current?.timeScale().fitContent()
   }, [data, markers])

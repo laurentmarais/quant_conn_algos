@@ -128,6 +128,7 @@ def _prepare_job_environment(job_id: str, payload: BacktestRequest) -> dict[str,
 
     config = copy.deepcopy(BASE_LEAN_CONFIG)
     config["results-destination-folder"] = str(job_dir)
+    config["close-automatically"] = True
 
     algorithm_manifest = _resolve_algorithm_config(payload.algorithmId)
     entry_point = algorithm_manifest.get("entryPoint")

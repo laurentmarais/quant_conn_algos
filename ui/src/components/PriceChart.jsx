@@ -98,14 +98,32 @@ export default function PriceChart({ symbol, candles, trades }) {
 
   useEffect(() => {
     if (!seriesRef.current) return
-    const formatted = (candles ?? []).map((candle) => ({
-      time: candle.time,
-      open: Number(candle.open ?? 0),
-      high: Number(candle.high ?? candle.open ?? 0),
-      low: Number(candle.low ?? candle.open ?? 0),
-      close: Number(candle.close ?? 0),
-    }))
-    seriesRef.current.setData(formatted)
+
+    const normalized = new Map()
+    for (const candle of candles ?? []) {
+      if (!candle?.time) {
+        continue
+      }
+
+      normalized.set(candle.time, {
+        time: candle.time,
+        open: Number(candle.open ?? 0),
+        high: Number(candle.high ?? candle.open ?? 0),
+        low: Number(candle.low ?? candle.open ?? 0),
+        close: Number(candle.close ?? 0),
+      })
+    }
+
+    const sorted = Array.from(normalized.values()).sort((a, b) => {
+      const aTime = a.time
+      const bTime = b.time
+      if (typeof aTime === 'string' && typeof bTime === 'string') {
+        return aTime.localeCompare(bTime)
+      }
+      return Number(aTime) - Number(bTime)
+    })
+
+    seriesRef.current.setData(sorted)
     seriesRef.current.setMarkers(markers)
     chartRef.current?.timeScale().fitContent()
   }, [candles, markers])
