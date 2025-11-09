@@ -9,11 +9,13 @@ class RsiMaCrossAlgorithm(QCAlgorithm):
         self.SetEndDate(2020, 1, 1)
         self.SetCash(100000)
 
-        self.symbol = self.AddEquity("SPY", Resolution.Daily).Symbol
+        symbol = self.GetParameter("symbol") or "SPY"
+        self.symbol = self.AddEquity(symbol, Resolution.Daily).Symbol  # type: ignore[name-defined]
 
-        self.rsi_period = 14
-        self.rsi_ma_period = 10
-        self.rsi = self.RSI(self.symbol, self.rsi_period, MovingAverageType.Wilders, Resolution.Daily)
+        self.rsi_period = int(self.GetParameter("rsiPeriod") or 14)
+        self.rsi_ma_period = int(self.GetParameter("smoothingPeriod") or 10)
+        self.exposure = float(self.GetParameter("exposure") or 1.0)
+        self.rsi = self.RSI(self.symbol, self.rsi_period, MovingAverageType.Wilders, Resolution.Daily)  # type: ignore[name-defined]
         self.rsi_ma = SimpleMovingAverage(self.rsi_ma_period)
 
         self.prev_spread: Optional[float] = None
@@ -35,7 +37,7 @@ class RsiMaCrossAlgorithm(QCAlgorithm):
 
         invested = self.Portfolio[self.symbol].Invested
         if self.prev_spread >= 0 and spread < 0 and not invested:
-            self.SetHoldings(self.symbol, 1.0)
+            self.SetHoldings(self.symbol, max(min(self.exposure, 1.0), 0.0))
         elif self.prev_spread <= 0 and spread > 0 and invested:
             self.Liquidate(self.symbol)
 

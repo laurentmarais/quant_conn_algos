@@ -1,6 +1,8 @@
 import { useEffect, useMemo, useState } from 'react'
 import './App.css'
 import { createBacktest, fetchAlgorithms, getBacktest } from './api/client'
+import PriceChart from './components/PriceChart'
+import TimeSeriesChart from './components/TimeSeriesChart'
 import { mockAlgorithms, mockBacktestResult } from './mock/data'
 
 const timeframeOptions = [
@@ -21,6 +23,11 @@ const percentFormatter = new Intl.NumberFormat('en-US', {
   maximumFractionDigits: 1,
 })
 
+function cloneParameters(input) {
+  if (!input) return {}
+  return JSON.parse(JSON.stringify(input))
+}
+
 function App() {
   const [algorithms, setAlgorithms] = useState(mockAlgorithms)
   const [selectedAlgoId, setSelectedAlgoId] = useState(
@@ -31,6 +38,9 @@ function App() {
   )
   const [timeframe, setTimeframe] = useState(
     mockAlgorithms[0]?.defaults.timeframe ?? timeframeOptions[0].id
+  )
+  const [parameters, setParameters] = useState(
+    () => cloneParameters(mockAlgorithms[0]?.defaults.parameters ?? {})
   )
   const [runState, setRunState] = useState('idle')
   const [activeTab, setActiveTab] = useState('chart')
@@ -51,6 +61,7 @@ function App() {
           setSelectedAlgoId(first.id)
           setSymbol(first?.defaults?.symbol ?? 'SPY')
           setTimeframe(first?.defaults?.timeframe ?? timeframeOptions[0].id)
+          setParameters(cloneParameters(first?.defaults?.parameters ?? {}))
           setRunState('idle')
           setResult(null)
           setNotice('')
@@ -62,6 +73,7 @@ function App() {
           'Backend API unavailable. Displaying sample data until the service is running.'
         )
         setAlgorithms(mockAlgorithms)
+  setParameters(cloneParameters(mockAlgorithms[0]?.defaults.parameters ?? {}))
         setResult(mockBacktestResult)
         setRunState('complete')
       }
@@ -97,7 +109,7 @@ function App() {
       timeframe,
       startDate: defaults.startDate,
       endDate: defaults.endDate,
-      parameters: defaults.parameters ?? {},
+      parameters,
     }
 
     try {
@@ -171,6 +183,7 @@ function App() {
           if (next?.defaults) {
             setSymbol(next.defaults.symbol ?? symbol)
             setTimeframe(next.defaults.timeframe ?? timeframeOptions[0].id)
+            setParameters(cloneParameters(next.defaults.parameters ?? {}))
           }
         }}
         onSymbolChange={(value) => setSymbol(value.toUpperCase())}
@@ -185,20 +198,26 @@ function App() {
           <TabList activeTab={activeTab} onChange={setActiveTab} />
           <div className="panel-body">
             {activeTab === 'chart' && (
-              <PriceTable
+              <PriceChart
                 symbol={result?.symbol ?? symbol}
                 candles={result?.priceSeries ?? []}
+                trades={result?.trades ?? []}
               />
             )}
 
             {activeTab === 'equity' && (
-              <SeriesList
-                title="Equity Curve"
-                data={result?.equityCurve ?? []}
-                valueFormatter={(point) =>
-                  `${point.time}: ${currencyFormatter.format(point.value ?? 0)}`
-                }
-              />
+              <div className="chart-wrapper">
+                <header className="chart-header">
+                  <h3>Equity Curve</h3>
+                </header>
+                <TimeSeriesChart
+                  data={result?.equityCurve ?? []}
+                  type="area"
+                  color="#38bdf8"
+                  height={320}
+                  yAxisFormatter={(value) => currencyFormatter.format(value)}
+                />
+              </div>
             )}
 
             {activeTab === 'trades' && (
@@ -210,7 +229,7 @@ function App() {
             )}
 
             {activeTab === 'indicators' && (
-              <IndicatorsPanel indicators={result?.indicators ?? {}} />
+              <IndicatorsPanel indicators={result?.indicators ?? []} />
             )}
 
             {activeTab === 'metrics' && (
@@ -363,23 +382,6 @@ function TabList({ activeTab, onChange }) {
   )
 }
 
-function SeriesList({ title, data, valueFormatter }) {
-  if (!data.length) {
-    return <div className="placeholder">No data available yet.</div>
-  }
-
-  return (
-    <div className="series-list">
-      <h3>{title}</h3>
-      <ul>
-        {data.map((point) => (
-          <li key={`${title}-${point.time}`}>{valueFormatter(point)}</li>
-        ))}
-      </ul>
-    </div>
-  )
-}
-
 function TradesTable({ trades }) {
   if (!trades.length) {
     return <div className="placeholder">No trades to display yet.</div>
@@ -470,68 +472,32 @@ function OrdersTable({ orders }) {
   )
 }
 
-function PriceTable({ symbol, candles }) {
-  if (!candles.length) {
-    return <div className="placeholder">Run a backtest to see price data.</div>
-  }
-
-  const rows = candles.slice(-200)
-
-  return (
-    <div className="trades-table-wrapper">
-      <table className="trades-table">
-        <thead>
-          <tr>
-            <th colSpan={5}>{symbol} Candles (most recent 200)</th>
-          </tr>
-          <tr>
-            <th>Date</th>
-            <th>Open</th>
-            <th>High</th>
-            <th>Low</th>
-            <th>Close</th>
-          </tr>
-        </thead>
-        <tbody>
-          {rows.map((candle) => (
-            <tr key={candle.time}>
-              <td>{candle.time}</td>
-              <td>{Number(candle.open ?? 0).toFixed(2)}</td>
-              <td>{Number(candle.high ?? candle.open ?? 0).toFixed(2)}</td>
-              <td>{Number(candle.low ?? candle.open ?? 0).toFixed(2)}</td>
-              <td>{Number(candle.close ?? 0).toFixed(2)}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
-  )
-}
-
 function IndicatorsPanel({ indicators }) {
-  const rsi = indicators?.rsi ?? []
-  const rsiSma = indicators?.rsiSma ?? []
-
-  if (!rsi.length && !rsiSma.length) {
+  if (!Array.isArray(indicators) || !indicators.length) {
     return <div className="placeholder">Indicators will appear here.</div>
   }
 
+  const usable = indicators.filter((item) => Array.isArray(item?.data) && item.data.length)
+  if (!usable.length) {
+    return <div className="placeholder">Indicators will appear here.</div>
+  }
+
+  const palette = ['#38bdf8', '#f97316', '#34d399', '#a855f7', '#facc15']
+
   return (
-    <div className="indicators-grid">
-      <SeriesList
-        title="RSI"
-        data={rsi}
-        valueFormatter={(point) =>
-          `${point.time}: ${(point.value ?? 0).toFixed(1)}`
-        }
-      />
-      <SeriesList
-        title="RSI Moving Average"
-        data={rsiSma}
-        valueFormatter={(point) =>
-          `${point.time}: ${(point.value ?? 0).toFixed(1)}`
-        }
-      />
+    <div className="indicator-grid">
+      {usable.map((indicator, index) => (
+        <div key={indicator.id ?? `${indicator.chart}-${indicator.series}-${index}`} className="chart-wrapper">
+          <header className="chart-header">
+            <h3>{indicator.label ?? `${indicator.chart} · ${indicator.series}`}</h3>
+          </header>
+          <TimeSeriesChart
+            data={indicator.data ?? []}
+            color={palette[index % palette.length]}
+            height={240}
+          />
+        </div>
+      ))}
     </div>
   )
 }

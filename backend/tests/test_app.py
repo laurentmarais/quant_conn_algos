@@ -100,6 +100,25 @@ def test_submit_backtest_queues_job(monkeypatch: pytest.MonkeyPatch, client: Tes
     assert isinstance(args[1], app_module.BacktestRequest)
 
 
+def test_prepare_job_environment_injects_parameters(monkeypatch: pytest.MonkeyPatch, tmp_path: Path) -> None:
+    storage_root = tmp_path / "storage"
+    monkeypatch.setattr(app_module, "BACKTEST_STORAGE_ROOT", storage_root)
+
+    payload = app_module.BacktestRequest(
+        algorithmId=app_module.ALGORITHMS[0]["id"],
+        symbol="SPY",
+        timeframe="1D",
+        parameters={"foo": "bar"},
+    )
+
+    env = app_module._prepare_job_environment("job-1", payload)
+    config_data = json.loads(Path(env["config_path"]).read_text())
+
+    assert config_data["parameters"]["symbol"] == "SPY"
+    assert config_data["parameters"]["timeframe"] == "1D"
+    assert config_data["parameters"]["foo"] == "bar"
+
+
 def test_parse_decimal_handles_various_inputs() -> None:
     parse = app_module._parse_decimal
     assert parse(10) == app_module.Decimal("10")
@@ -171,15 +190,21 @@ def test_extract_orders_normalizes_fields() -> None:
 
 
 def test_extract_indicator_series_returns_rsi_values() -> None:
-    chart = {
-        "series": {
-            "RSI": {"values": [[1609459200, "50"], [1609545600, "55"]]},
-            "RSI_MA": {"values": [[1609459200, "48"], [1609545600, "52"]]},
+    report = {
+        "charts": {
+            "RSI": {
+                "series": {
+                    "RSI": {"values": [[1609459200, "50"], [1609545600, "55"]]},
+                    "RSI_MA": {"values": [[1609459200, "48"], [1609545600, "52"]]},
+                }
+            }
         }
     }
-    result = app_module._extract_indicator_series(chart)
-    assert result["rsi"][0]["value"] == 50.0
-    assert result["rsiSma"][1]["value"] == 52.0
+    indicators = app_module._extract_indicator_series(report, "SPY")
+    assert indicators
+    indicator_map = {item["series"]: item for item in indicators}
+    assert indicator_map["RSI"]["data"][0]["value"] == 50.0
+    assert indicator_map["RSI_MA"]["data"][1]["value"] == 52.0
 
 
 def test_extract_trades_formats_summary() -> None:
@@ -329,7 +354,8 @@ def test_run_backtest_job_happy_path(monkeypatch: pytest.MonkeyPatch, tmp_path: 
     assert result["metrics"]["totalTrades"] == 1
     assert result["priceSeries"][0]["close"] == 101.0
     assert result["orders"][0]["status"] == "Filled"
-    assert result["indicators"]["rsi"][0]["value"] == 50.0
+    indicator_map = {item["series"]: item for item in result["indicators"]}
+    assert indicator_map["RSI"]["data"][0]["value"] == 50.0
     assert "summaryPath" in result["artifacts"]
 
 

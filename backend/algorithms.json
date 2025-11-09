@@ -10,9 +10,48 @@
       "endDate": "2020-12-31",
       "parameters": {
         "rsiPeriod": 14,
-        "smoothingPeriod": 5
+        "smoothingPeriod": 5,
+        "exposure": 1.0
       }
     },
     "entryPoint": "rsi_ma_cross.py"
+  },
+  {
+    "id": "ema-trend-follower",
+    "name": "EMA Trend Follower",
+    "description": "Follows EMA momentum with ATR-based trailing stops to capture medium-term breakouts.",
+    "defaults": {
+      "symbol": "QQQ",
+      "timeframe": "1D",
+      "startDate": "2017-01-01",
+      "endDate": "2021-01-01",
+      "parameters": {
+        "fastPeriod": 12,
+        "slowPeriod": 30,
+        "atrPeriod": 14,
+        "atrMultiplier": 2.5,
+        "rsiPeriod": 14,
+        "exposure": 0.9
+      }
+    },
+    "entryPoint": "trend_follow_ema.py"
+  },
+  {
+    "id": "bollinger-reversion",
+    "name": "Bollinger Band Reversion",
+    "description": "Mean-reversion setup that fades Bollinger Band extremes with RSI confirmation.",
+    "defaults": {
+      "symbol": "IWM",
+      "timeframe": "1D",
+      "startDate": "2016-01-01",
+      "endDate": "2021-01-01",
+      "parameters": {
+        "basisPeriod": 20,
+        "stdDev": 2.0,
+        "rsiPeriod": 14,
+        "exposure": 0.75
+      }
+    },
+    "entryPoint": "bollinger_reversion.py"
   }
 ]

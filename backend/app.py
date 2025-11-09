@@ -4,6 +4,7 @@ import datetime as dt
 import copy
 import json
 import os
+import re
 import shutil
 import subprocess
 import time
@@ -139,11 +140,22 @@ def _prepare_job_environment(job_id: str, payload: BacktestRequest) -> dict[str,
     if payload.endDate:
         config["end-date"] = payload.endDate
 
+    manifest_defaults = algorithm_manifest.get("defaults", {})
+    default_params = manifest_defaults.get("parameters", {}) if isinstance(manifest_defaults, dict) else {}
+
+    parameter_values: dict[str, Any] = {}
+    parameter_values.update(default_params or {})
     if payload.parameters:
-        config["parameters"] = {
-            key: str(value)
-            for key, value in payload.parameters.items()
-        }
+        parameter_values.update(payload.parameters)
+
+    parameter_values["symbol"] = payload.symbol.upper()
+    parameter_values["timeframe"] = payload.timeframe
+
+    config["parameters"] = {
+        key: str(value)
+        for key, value in parameter_values.items()
+        if value is not None
+    }
 
     config_path = job_dir / "lean-config.json"
     config_path.write_text(json.dumps(config, indent=2))
@@ -275,31 +287,73 @@ def _extract_price_series(report: dict[str, Any], symbol: str) -> list[dict[str,
     return []
 
 
-def _extract_indicator_series(chart: dict[str, Any]) -> dict[str, list[dict[str, Any]]]:
-    series = chart.get("series", {}) if chart else {}
-    output: dict[str, list[dict[str, Any]]] = {"rsi": [], "rsiSma": []}
+def _normalize_indicator_key(chart_name: str, series_name: str, existing: set[str]) -> str:
+    base = f"{chart_name} {series_name}".strip()
+    cleaned = re.sub(r"[^0-9a-zA-Z]+", " ", base).strip()
+    if not cleaned:
+        cleaned = "indicator"
+    camel = cleaned.title().replace(" ", "")
+    if camel:
+        key = camel[0].lower() + camel[1:]
+    else:
+        key = "indicator"
+    suffix = 2
+    candidate = key
+    while candidate in existing:
+        candidate = f"{key}{suffix}"
+        suffix += 1
+    return candidate
 
-    rsi_series = series.get("RSI")
-    if rsi_series:
-        for point in rsi_series.get("values", []):
-            if not isinstance(point, list) or len(point) < 2:
+
+def _extract_indicator_series(report: dict[str, Any], symbol: str) -> list[dict[str, Any]]:
+    charts = report.get("charts", {}) if report else {}
+    normalized_symbol = (symbol or "").upper()
+    skip_names = {normalized_symbol, symbol, "Strategy Equity", "Benchmark"}
+
+    indicators: list[dict[str, Any]] = []
+    seen_keys: set[str] = set()
+
+    for chart_name, chart in charts.items():
+        if not isinstance(chart_name, str) or not isinstance(chart, dict):
+            continue
+        if chart_name in skip_names:
+            continue
+
+        series_map = chart.get("series", {})
+        if not isinstance(series_map, dict):
+            continue
+
+        for series_name, series in series_map.items():
+            if not isinstance(series_name, str) or not isinstance(series, dict):
                 continue
-            time_label = _format_epoch_seconds(point[0])
-            decimal_value = _parse_decimal(point[1])
-            if decimal_value is not None:
-                output["rsi"].append({"time": time_label, "value": float(decimal_value)})
 
-    rsi_ma_series = series.get("RSI_MA")
-    if rsi_ma_series:
-        for point in rsi_ma_series.get("values", []):
-            if not isinstance(point, list) or len(point) < 2:
+            values = []
+            for point in series.get("values", []):
+                if not isinstance(point, list) or len(point) < 2:
+                    continue
+                time_label = _format_epoch_seconds(point[0])
+                decimal_value = _parse_decimal(point[-1])
+                if decimal_value is None:
+                    continue
+                values.append({"time": time_label, "value": float(decimal_value)})
+
+            if not values:
                 continue
-            time_label = _format_epoch_seconds(point[0])
-            decimal_value = _parse_decimal(point[1])
-            if decimal_value is not None:
-                output["rsiSma"].append({"time": time_label, "value": float(decimal_value)})
 
-    return output
+            key = _normalize_indicator_key(chart_name, series_name, seen_keys)
+            seen_keys.add(key)
+            indicators.append(
+                {
+                    "id": key,
+                    "chart": chart_name,
+                    "series": series_name,
+                    "label": f"{chart_name} · {series_name}",
+                    "data": values,
+                }
+            )
+
+    indicators.sort(key=lambda item: item["label"])
+    return indicators
 
 
 def _extract_trades(summary: dict[str, Any]) -> list[dict[str, Any]]:
@@ -393,8 +447,7 @@ def _build_backtest_result(
         "sortino": _decimal_to_float(_parse_decimal(statistics.get("Sortino Ratio"))),
     }
 
-    rsi_chart = report.get("charts", {}).get("RSI", {})
-    indicators = _extract_indicator_series(rsi_chart)
+    indicators = _extract_indicator_series(report, payload.symbol)
 
     artifacts = {
         "summaryPath": str(summary_path),
