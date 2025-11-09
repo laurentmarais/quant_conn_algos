@@ -1,16 +1,35 @@
-# React + Vite
+# QuantConnect Control Room UI
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Vite + React frontend that manages algorithm selection, parameter editing, and visualization of Lean backtest output.
 
-Currently, two official plugins are available:
+## Commands
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+```bash
+cd ui
+npm install        # first run
+npm run dev        # start dev server
+npm run build      # production build
+npm run test -- --run   # vitest suite
+```
 
-## React Compiler
+The dev server defaults to `http://localhost:5173/`. If the port is occupied, Vite increments (e.g., `5174`, `5175`).
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Key Components
 
-## Expanding the ESLint configuration
+- `src/App.jsx` – Application shell, algorithm picker, parameter state, backtest polling, and tab layout.
+- `src/components/ParameterControls.jsx` – Sidebar editor for algorithm-specific parameters with reset helpers.
+- `src/components/PriceChart.jsx` – Candle chart with trade markers using `lightweight-charts`.
+- `src/components/TimeSeriesChart.jsx` – Shared line/area chart for equity and indicator series.
+- `src/api/client.js` – REST client helpers for backend endpoints.
+- `src/mock/data.js` – Mock manifest/backtest payloads for offline development.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Testing
+
+- `npm run test -- --run` executes vitest unit/contract tests.
+- Add component tests beside new modules under `src/`.
+
+## Update Checklist
+
+- Keep `src/api/client.js` in sync with backend payloads.
+- Update `src/mock/data.js` when backend schema changes.
+- Add styles to `src/App.css` alongside new components.

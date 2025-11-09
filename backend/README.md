@@ -1,23 +1,48 @@
 # Backend Service (FastAPI)
 
-Prototype API that exposes QuantConnect Lean algorithms, runs backtests, and serves market data to the React UI.
+FastAPI application that orchestrates QuantConnect Lean backtests and normalizes results for the React UI.
 
-## Commands
+## Responsibilities
+
+- Serve the algorithm manifest (`GET /algorithms`).
+- Launch Lean backtests (`POST /backtests`) and expose job status/results (`GET /backtests/{id}`).
+- Provide prototype market data slices (`GET /market-data`).
+- Translate Lean JSON output into UI-friendly structures (candles, equity, indicators, trades, orders, metrics).
+
+## Setup & Run
 
 ```bash
-cd backend
+# from repo root
 python3.11 -m venv .venv
 source .venv/bin/activate
-pip install -r requirements.txt
-uvicorn app:app --reload
+pip install -r backend/requirements.txt
+
+cd backend
+../.venv/bin/uvicorn app:app --reload
 ```
 
-## REST Endpoints
+If port `8000` is already bound:
 
-- `GET /` – Health check.
-- `GET /algorithms` – Manifest of available algorithms with default parameters.
-- `POST /backtests` – Launch a backtest (currently returns sample result immediately).
-- `GET /backtests/{jobId}` – Retrieve backtest status/results.
-- `GET /market-data?symbol=SPY&timeframe=1D` – Sample OHLCV candles for prototype UI.
+```bash
+lsof -i tcp:8000
+kill <pid>
+```
 
-`POST /backtests`/`GET /backtests/{jobId}` currently hydrate responses from `sample_backtest.json`. Replace the stubs once Lean orchestration is wired up.
+## Key Files
+
+- `app.py` – FastAPI app, Lean job orchestration, normalization helpers.
+- `algorithms.json` – Strategy manifest with defaults and entry points.
+- `tests/test_app.py` – Pytest coverage for endpoints and data shaping logic.
+- `sample_backtest.json` – Legacy stub payload (kept for regression fixtures).
+
+## Lean Integration Notes
+
+- Backtests write under `../storage/backtests/<job-id>/` using generated `lean-config.json` files.
+- Ensure required data (e.g., minute QQQ) exists in `../Lean/Data` before requesting corresponding timeframes.
+- Override `PYTHONNET_PYDLL` if Lean cannot locate a Python runtime.
+
+## Update Checklist
+
+- Sync `algorithms.json` whenever new strategies or defaults are introduced.
+- Extend `_extract_*` helpers in `app.py` when Lean payload formats evolve.
+- Back test changes with `pytest` to protect normalization logic.

@@ -3,6 +3,7 @@ import './App.css'
 import { createBacktest, fetchAlgorithms, getBacktest } from './api/client'
 import PriceChart from './components/PriceChart'
 import TimeSeriesChart from './components/TimeSeriesChart'
+import ParameterControls from './components/ParameterControls'
 import { mockAlgorithms, mockBacktestResult } from './mock/data'
 
 const timeframeOptions = [
@@ -25,7 +26,53 @@ const percentFormatter = new Intl.NumberFormat('en-US', {
 
 function cloneParameters(input) {
   if (!input) return {}
-  return JSON.parse(JSON.stringify(input))
+  return Object.fromEntries(
+    Object.entries(input).map(([key, value]) => {
+      if (value == null) {
+        return [key, '']
+      }
+      if (typeof value === 'number') {
+        return [key, String(value)]
+      }
+      return [key, value]
+    })
+  )
+}
+
+function coerceParameterTypes(currentValues, defaults = {}) {
+  const result = {}
+
+  Object.entries(defaults).forEach(([key, defaultValue]) => {
+    const raw = currentValues?.[key]
+    if (raw === undefined || raw === '') {
+      result[key] = defaultValue
+      return
+    }
+
+    if (typeof defaultValue === 'number') {
+      const parsed = Number(raw)
+      result[key] = Number.isFinite(parsed) ? parsed : defaultValue
+    } else {
+      result[key] = raw
+    }
+  })
+
+  Object.entries(currentValues ?? {}).forEach(([key, raw]) => {
+    if (result[key] !== undefined) {
+      return
+    }
+    if (raw === '' || raw === undefined) {
+      return
+    }
+    const numeric = Number(raw)
+    if (Number.isFinite(numeric)) {
+      result[key] = numeric
+    } else {
+      result[key] = raw
+    }
+  })
+
+  return result
 }
 
 function App() {
@@ -73,7 +120,9 @@ function App() {
           'Backend API unavailable. Displaying sample data until the service is running.'
         )
         setAlgorithms(mockAlgorithms)
-  setParameters(cloneParameters(mockAlgorithms[0]?.defaults.parameters ?? {}))
+        setParameters(
+          cloneParameters(mockAlgorithms[0]?.defaults.parameters ?? {})
+        )
         setResult(mockBacktestResult)
         setRunState('complete')
       }
@@ -92,6 +141,31 @@ function App() {
   )
 
   const defaults = selectedAlgo?.defaults ?? {}
+  const parameterDefaults = defaults.parameters ?? {}
+
+  const handleParameterChange = (key, value) => {
+    setParameters((prev) => ({
+      ...prev,
+      [key]: value,
+    }))
+  }
+
+  const handleParameterReset = (key) => {
+    const defaultValue = parameterDefaults[key]
+    setParameters((prev) => ({
+      ...prev,
+      [key]:
+        defaultValue === undefined || defaultValue === null
+          ? ''
+          : typeof defaultValue === 'number'
+            ? String(defaultValue)
+            : defaultValue,
+    }))
+  }
+
+  const handleParameterResetAll = () => {
+    setParameters(cloneParameters(parameterDefaults))
+  }
 
   const handleRun = async () => {
     if (!selectedAlgoId) {
@@ -109,7 +183,7 @@ function App() {
       timeframe,
       startDate: defaults.startDate,
       endDate: defaults.endDate,
-      parameters,
+      parameters: coerceParameterTypes(parameters, parameterDefaults),
     }
 
     try {
@@ -241,6 +315,15 @@ function App() {
         <aside className="panel secondary-panel">
           <h2>{selectedAlgo?.name ?? 'Select an algorithm'}</h2>
           <p className="algo-description">{selectedAlgo?.description}</p>
+
+          <ParameterControls
+            parameters={parameters}
+            defaults={parameterDefaults}
+            onChange={handleParameterChange}
+            onReset={handleParameterReset}
+            onResetAll={handleParameterResetAll}
+            disabled={runState === 'running'}
+          />
 
           <div className="summary-block">
             <span className="summary-label">Run status</span>
