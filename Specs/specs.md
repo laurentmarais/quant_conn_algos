@@ -84,6 +84,7 @@ Completed Work
 - Local dev runbook validated: installed missing `uvicorn`/FastAPI dependencies, confirmed backend live on `http://127.0.0.1:8000`, and brought up the Vite UI server on `http://localhost:5173/`.
 - Cleaned up stale pip metadata (`~ip-25.2.dist-info`) so dependency installs no longer raise "invalid distribution" warnings.
 - Sidebar parameter controls now mirror algorithm defaults and allow tweaking strategy inputs before launching a backtest, including reset-to-default helpers.
+- Hardened trade normalization: `_extract_trades` now falls back to Lean report payloads, filters by symbol, and keeps order extraction intact so UI markers populate; regression test added and real backtest artifacts confirm 67 trades plus 731 daily candles for `SPY` between 2018-01-01 and 2019-12-31.
 
 Local Run Instructions
 ----------------------
@@ -119,6 +120,6 @@ Outstanding Work
 2. Persist recent backtest runs and expose a job history view within the UI.
 3. Expand automated coverage to include lightweight-charts component/unit tests plus an end-to-end harness that drives the UI against the live FastAPI dev server.
 4. Harden the new parameter editor with type-aware validation, helper text, and guardrails (min/max bounds, safe ranges) per algorithm.
-5. Document the validated backend/UI startup runbook and ensure future environment bootstrap pulls in FastAPI/Uvicorn out of the box.
+5. Document any deviations when additional backend dependencies are introduced so the startup runbook stays accurate.
 6. Tackle npm audit issues (five moderate vulnerabilities flagged) or document acceptable risk/mitigations.
-7. Perform manual end-to-end QA after each iteration (launch UI at `http://localhost:5173/`, trigger a Lean backtest, verify tables/charts) until automated coverage is in place.
+7. Perform manual end-to-end QA after each iteration (launch UI at `http://localhost:5173/`, trigger a Lean backtest, verify candles plus trade markers with the new extractor) until automated coverage is in place.

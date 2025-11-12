@@ -239,6 +239,50 @@ def test_extract_trades_formats_summary() -> None:
     ]
 
 
+def test_extract_trades_falls_back_to_report_and_filters_symbol() -> None:
+    summary = {"totalPerformance": {"closedTrades": []}}
+    report = {
+        "totalPerformance": {
+            "closedTrades": [
+                {
+                    "direction": 1,
+                    "entryTime": "2021-02-01T00:00:00Z",
+                    "exitTime": "2021-02-02T00:00:00Z",
+                    "entryPrice": "200",
+                    "exitPrice": "190",
+                    "quantity": 5,
+                    "profitLoss": "-50",
+                    "symbol": {"value": "SPY"},
+                },
+                {
+                    "direction": 0,
+                    "entryTime": "2021-03-01T00:00:00Z",
+                    "exitTime": "2021-03-02T00:00:00Z",
+                    "entryPrice": "100",
+                    "exitPrice": "110",
+                    "quantity": 2,
+                    "profitLoss": "20",
+                    "symbol": {"value": "QQQ"},
+                },
+            ]
+        }
+    }
+
+    trades = app_module._extract_trades(summary, report, "SPY")
+    assert trades == [
+        {
+            "id": 1,
+            "direction": "Short",
+            "entryTime": "2021-02-01",
+            "exitTime": "2021-02-02",
+            "entryPrice": 200.0,
+            "exitPrice": 190.0,
+            "quantity": 5,
+            "profit": -50.0,
+        }
+    ]
+
+
 def test_run_backtest_job_happy_path(monkeypatch: pytest.MonkeyPatch, tmp_path: Path) -> None:
     job_id = "job-123"
     payload = app_module.BacktestRequest(

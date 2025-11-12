@@ -1,0 +1,162 @@
+2025-11-09T15:44:25.7535730Z TRACE:: Engine.Main(): LEAN ALGORITHMIC TRADING ENGINE v2.5.0.0 Mode: DEBUG (64bit) Host: MacBook-Pro
+2025-11-09T15:44:25.7603730Z TRACE:: Engine.Main(): Started 8:44 AM
+2025-11-09T15:44:25.7604910Z TRACE:: Config.Get(): Configuration key not found. Key: job-queue-handler - Using default value: QuantConnect.Queues.JobQueue
+2025-11-09T15:44:25.7609420Z TRACE:: Config.Get(): Configuration key not found. Key: api-handler - Using default value: QuantConnect.Api.Api
+2025-11-09T15:44:25.7613260Z TRACE:: Config.Get(): Configuration key not found. Key: messaging-handler - Using default value: QuantConnect.Messaging.Messaging
+2025-11-09T15:44:25.7615230Z TRACE:: Config.Get(): Configuration key not found. Key: lean-manager-type - Using default value: LocalLeanManager
+2025-11-09T15:44:25.7692530Z TRACE:: JobQueue.NextJob(): Selected /Users/laurentmarais/Documents/GitHub/quant_conn_algos/bollinger_reversion.py
+2025-11-09T15:44:25.7723720Z TRACE:: Config.GetValue(): scheduled-event-leaky-bucket-capacity - Using default value: 120
+2025-11-09T15:44:25.7723870Z TRACE:: Config.GetValue(): scheduled-event-leaky-bucket-time-interval-minutes - Using default value: 1440
+2025-11-09T15:44:25.7723970Z TRACE:: Config.GetValue(): scheduled-event-leaky-bucket-refill-amount - Using default value: 18
+2025-11-09T15:44:25.7724680Z TRACE:: Config.GetValue(): symbol-minute-limit - Using default value: 10000
+2025-11-09T15:44:25.7724780Z TRACE:: Config.GetValue(): symbol-second-limit - Using default value: 10000
+2025-11-09T15:44:25.7724870Z TRACE:: Config.GetValue(): symbol-tick-limit - Using default value: 10000
+2025-11-09T15:44:25.7724950Z TRACE:: Config.GetValue(): maximum-data-points-per-chart-series - Using default value: 1000000
+2025-11-09T15:44:25.7725020Z TRACE:: Config.GetValue(): maximum-chart-series - Using default value: 30
+2025-11-09T15:44:25.7728680Z TRACE:: Config.GetValue(): storage-limit - Using default value: 10737418240
+2025-11-09T15:44:25.7728780Z TRACE:: Config.GetValue(): storage-file-count - Using default value: 10000
+2025-11-09T15:44:25.7732700Z TRACE:: Config.GetValue(): storage-permissions - Using default value: Read=True Write=True Delete=True
+2025-11-09T15:44:25.7732790Z TRACE:: Config.Get(): Configuration key not found. Key: algorithm-id - Using default value: RsiMaCrossAlgorithm
+2025-11-09T15:44:25.7733010Z TRACE:: Config.Get(): Configuration key not found. Key: optimization-id - Using default value: 
+2025-11-09T15:44:25.7733090Z TRACE:: Config.Get(): Configuration key not found. Key: backtest-name - Using default value: local
+2025-11-09T15:44:25.7741150Z TRACE:: Config.Get(): Configuration key not found. Key: data-channel - Using default value: 
+2025-11-09T15:44:25.7741940Z TRACE:: Config.Get(): Configuration key not found. Key: python-venv - Using default value: 
+2025-11-09T15:44:25.7742240Z TRACE:: Config.Get(): Configuration key not found. Key: out-of-sample-max-end-date - Using default value: 
+2025-11-09T15:44:25.7742320Z TRACE:: Config.GetValue(): out-of-sample-days - Using default value: 0
+2025-11-09T15:44:25.7746170Z TRACE:: Config.Get(): Configuration key not found. Key: map-file-provider - Using default value: LocalDiskMapFileProvider
+2025-11-09T15:44:25.7746260Z TRACE:: Config.Get(): Configuration key not found. Key: factor-file-provider - Using default value: LocalDiskFactorFileProvider
+2025-11-09T15:44:25.7746340Z TRACE:: Config.Get(): Configuration key not found. Key: data-provider - Using default value: DefaultDataProvider
+2025-11-09T15:44:25.7746430Z TRACE:: Config.Get(): Configuration key not found. Key: object-store - Using default value: LocalObjectStore
+2025-11-09T15:44:25.7746500Z TRACE:: Config.Get(): Configuration key not found. Key: data-permission-manager - Using default value: DataPermissionManager
+2025-11-09T15:44:25.7746560Z TRACE:: Config.Get(): Configuration key not found. Key: data-monitor - Using default value: QuantConnect.Data.DataMonitor
+2025-11-09T15:44:25.7800770Z TRACE:: Config.GetValue(): initialization-timeout - Using default value: 300
+2025-11-09T15:44:25.7800960Z TRACE:: Config.GetValue(): algorithm-creation-timeout - Using default value: 90
+2025-11-09T15:44:25.7827740Z TRACE:: Config.GetValue(): zip-data-cache-provider - Using default value: 10
+2025-11-09T15:44:25.7832420Z TRACE:: Config.Get(): Configuration key not found. Key: fundamental-data-provider - Using default value: CoarseFundamentalDataProvider
+2025-11-09T15:44:25.7838900Z TRACE:: AlgorithmManager.CreateTokenBucket(): Initializing LeakyBucket: Capacity: 120 RefillAmount: 18 TimeInterval: 1440
+2025-11-09T15:44:25.7840800Z TRACE:: Config.GetValue(): algorithm-manager-time-loop-maximum - Using default value: 20
+2025-11-09T15:44:25.7857330Z TRACE:: Config.GetValue(): downloader-data-update-period - Using default value: 7
+2025-11-09T15:44:25.7871760Z TRACE:: Engine.Run(): Resource limits '0' CPUs. 2147483647 MB RAM.
+2025-11-09T15:44:25.7873310Z TRACE:: TextSubscriptionDataSourceReader.SetCacheSize(): Setting cache size to 71582788 items
+2025-11-09T15:44:26.0381490Z TRACE:: Config.GetValue(): force-exchange-always-open - Using default value: False
+2025-11-09T15:44:26.0384970Z TRACE:: Config.GetValue(): debugging - Using default value: False
+2025-11-09T15:44:26.0391950Z TRACE:: PythonInitializer.Initialize(): start...
+2025-11-09T15:44:26.1900150Z TRACE:: PythonInitializer.Initialize(): ended
+2025-11-09T15:44:26.1905980Z TRACE:: AlgorithmPythonWrapper(): Python version 3.11.14 (main, Oct  9 2025, 16:16:55) [Clang 17.0.0 (clang-1700.0.13.3)]: Importing python module bollinger_reversion
+2025-11-09T15:44:27.2452430Z TRACE:: AlgorithmPythonWrapper(): bollinger_reversion successfully imported.
+2025-11-09T15:44:27.2465040Z TRACE:: AlgorithmPythonWrapper(): Creating IAlgorithm instance.
+2025-11-09T15:44:27.2505750Z TRACE:: Config.Get(): Configuration key not found. Key: databases-refresh-period - Using default value: 1.00:00:00
+2025-11-09T15:44:27.2507940Z TRACE:: Config.GetValue(): ignore-unknown-asset-holdings - Using default value: True
+2025-11-09T15:44:27.2944890Z TRACE:: Config.GetValue(): mute-python-library-logging - Using default value: True
+2025-11-09T15:44:27.2951980Z TRACE:: Config.Get(): Configuration key not found. Key: object-store-root - Using default value: ./storage
+2025-11-09T15:44:27.2962800Z TRACE:: LocalObjectStore.Initialize(): Storage Root: /Users/laurentmarais/Documents/GitHub/Lean/Launcher/storage. StorageFileCount 10000. StorageLimit 10240MB. StoragePermissions Read=True Write=True Delete=True
+2025-11-09T15:44:27.2987620Z TRACE:: Config.GetValue(): zip-data-cache-provider - Using default value: 10
+2025-11-09T15:44:27.3010250Z TRACE:: HistoryProviderManager.Initialize(): history providers [SubscriptionDataReaderHistoryProvider]
+2025-11-09T15:44:27.3028330Z TRACE:: BaseSetupHandler.Setup(LocalPlatform): UID: 0, PID: 0, Version: 2.5.0.0, Source: WebIDE
+2025-11-09T15:44:27.3041920Z TRACE:: Config.Get(): Configuration key not found. Key: security-data-feeds - Using default value: 
+2025-11-09T15:44:27.3145840Z TRACE:: Config.Get(): Configuration key not found. Key: reserved-words-prefix - Using default value: @
+2025-11-09T15:44:27.3590520Z TRACE:: BaseSetupHandler.SetupCurrencyConversions():
+Account Type: Margin
+
+Symbol      Quantity    Conversion = Value in USD
+USD: $      100000.00 @       1.00 = $100000
+-------------------------------------------------
+CashBook Total Value:                $100000
+
+2025-11-09T15:44:27.3598790Z TRACE:: Total margin information: TotalMarginUsed: 0.00, MarginRemaining: 100000.00
+2025-11-09T15:44:27.3600050Z TRACE:: SetUp Backtesting: User: 0 ProjectId: 0 AlgoId: RsiMaCrossAlgorithm
+2025-11-09T15:44:27.3606390Z TRACE:: Dates: Start: 01/01/2016 End: 01/01/2021 Cash: ¤100,000.00 MaximumRuntime: 100.00:00:00 MaxOrders: 2147483647
+2025-11-09T15:44:27.3622060Z TRACE:: BacktestingResultHandler(): Sample Period Set: 658.08
+2025-11-09T15:44:27.3623310Z TRACE:: Config.GetValue(): forward-console-messages - Using default value: True
+2025-11-09T15:44:27.3623940Z TRACE:: JOB HANDLERS:
+         DataFeed:             QuantConnect.Lean.Engine.DataFeeds.FileSystemDataFeed
+         Setup:                QuantConnect.Lean.Engine.Setup.BacktestingSetupHandler
+         RealTime:             QuantConnect.Lean.Engine.RealTime.BacktestingRealTimeHandler
+         Results:              QuantConnect.Lean.Engine.Results.BacktestingResultHandler
+         Transactions:         QuantConnect.Lean.Engine.TransactionHandlers.BacktestingTransactionHandler
+         Object Store:         QuantConnect.Lean.Engine.Storage.LocalObjectStore
+         History Provider:     QuantConnect.Lean.Engine.HistoricalData.HistoryProviderManager
+         Brokerage:            QuantConnect.Brokerages.Backtesting.BacktestingBrokerage
+         Data Provider:        QuantConnect.Lean.Engine.DataFeeds.DefaultDataProvider
+
+2025-11-09T15:44:27.3681830Z TRACE:: Event Name "Daily Sampling", scheduled to run.
+2025-11-09T15:44:27.3686490Z TRACE:: AlgorithmManager.Run(): Begin DataStream - Start: 1/1/2016 12:00:00 AM Stop: 1/1/2021 11:59:59 PM Time: 10/7/2015 12:00:00 AM Warmup: True
+2025-11-09T15:44:27.3754490Z TRACE:: Debug: Launching analysis for RsiMaCrossAlgorithm with LEAN Engine v2.5.0.0
+2025-11-09T15:44:27.3817130Z TRACE:: Config.GetValue(): data-feed-workers-count - Using default value: 8
+2025-11-09T15:44:27.3818780Z TRACE:: Config.GetValue(): data-feed-max-work-weight - Using default value: 400
+2025-11-09T15:44:27.3818900Z TRACE:: WeightedWorkScheduler(): will use 8 workers and MaxWorkWeight is 400
+2025-11-09T15:44:27.3896620Z TRACE:: Config.GetValue(): show-missing-data-logs - Using default value: False
+2025-11-09T15:44:27.4161820Z TRACE:: UniverseSelection.AddPendingInternalDataFeeds(): Adding internal benchmark data feed SPY,#0,SPY,Hour,TradeBar,Trade,Adjusted,OpenInterest,Internal
+2025-11-09T15:44:27.4903520Z TRACE:: AlgorithmManager.Stream(): Subscriptions count before warm up: 3
+2025-11-09T15:44:27.5175780Z TRACE:: AlgorithmManager.Run(): 12/24/2015 12:00:00 AM: Skip Dividend during warmup: Dividend: IWM: 0.50 | 114.76
+2025-11-09T15:44:27.5190350Z TRACE:: AlgorithmManager.Stream(): Subscriptions count after warm up: 3
+2025-11-09T15:44:27.5285010Z TRACE:: Debug: Accurate daily end-times now enabled by default. See more at https://qnt.co/3YHaWHL. To disable it and use legacy daily bars set self.settings.daily_precise_end_time = False.
+2025-11-09T15:44:27.5285150Z TRACE:: Debug: Algorithm starting warm up...
+2025-11-09T15:44:27.5285230Z TRACE:: Debug: Algorithm finished warming up.
+2025-11-09T15:44:27.5468070Z TRACE:: Config.GetValue(): portfolio-margin-series-count - Using default value: 40
+2025-11-09T15:44:27.5792530Z TRACE:: Debug: Warning: all market orders sent using daily data, or market orders sent after hours are automatically converted into MarketOnOpen orders.
+2025-11-09T15:44:27.8589380Z TRACE:: Synchronizer.GetEnumerator(): Exited thread.
+2025-11-09T15:44:27.8592300Z TRACE:: AlgorithmManager.Run(): Firing On End Of Algorithm...
+2025-11-09T15:44:27.8594900Z TRACE:: Engine.Run(): Exiting Algorithm Manager
+2025-11-09T15:44:27.8595640Z TRACE:: Config.Get(): Configuration key not found. Key: transaction-log - Using default value: 
+2025-11-09T15:44:27.8609950Z TRACE:: StopSafely(): Waiting for 'Isolator Thread' thread to stop...
+2025-11-09T15:44:27.8611880Z TRACE:: FileSystemDataFeed.Exit(): Start. Setting cancellation token...
+2025-11-09T15:44:27.8616620Z TRACE:: FileSystemDataFeed.Exit(): Exit Finished.
+2025-11-09T15:44:27.8617540Z TRACE:: BacktestingResultHandler.Exit(): starting...
+2025-11-09T15:44:27.8617870Z TRACE:: BacktestingResultHandler.Exit(): Saving logs...
+2025-11-09T15:44:27.8622300Z TRACE:: Debug: Algorithm Id:(RsiMaCrossAlgorithm) completed in 0.50 seconds at 21k data points per second. Processing total of 10,542 data points.
+2025-11-09T15:44:27.8622390Z TRACE:: StopSafely(): Waiting for 'Result Thread' thread to stop...
+2025-11-09T15:44:27.8622430Z TRACE:: Debug: Your log was successfully created and can be retrieved from: /Users/laurentmarais/Documents/GitHub/quant_conn_algos/storage/backtests/42a42667-737c-486d-a1f1-4e0423bd0ce2/RsiMaCrossAlgorithm-log.txt
+2025-11-09T15:44:27.8622500Z TRACE:: BacktestingResultHandler.Run(): Ending Thread...
+2025-11-09T15:44:28.1901870Z TRACE:: 
+STATISTICS:: Total Orders 20
+STATISTICS:: Average Win 2.83%
+STATISTICS:: Average Loss -7.21%
+STATISTICS:: Compounding Annual Return -2.845%
+STATISTICS:: Drawdown 29.300%
+STATISTICS:: Expectancy -0.164
+STATISTICS:: Start Equity 100000
+STATISTICS:: End Equity 86548.47
+STATISTICS:: Net Profit -13.452%
+STATISTICS:: Sharpe Ratio -0.353
+STATISTICS:: Sortino Ratio -0.118
+STATISTICS:: Probabilistic Sharpe Ratio 0.066%
+STATISTICS:: Loss Rate 40%
+STATISTICS:: Win Rate 60%
+STATISTICS:: Profit-Loss Ratio 0.39
+STATISTICS:: Alpha -0.074
+STATISTICS:: Beta 0.42
+STATISTICS:: Annual Standard Deviation 0.092
+STATISTICS:: Annual Variance 0.008
+STATISTICS:: Information Ratio -1.179
+STATISTICS:: Tracking Error 0.111
+STATISTICS:: Treynor Ratio -0.077
+STATISTICS:: Total Fees $58.96
+STATISTICS:: Estimated Strategy Capacity $340000000.00
+STATISTICS:: Lowest Capacity Asset IWM RV0PWMLXVHPH
+STATISTICS:: Portfolio Turnover 0.82%
+STATISTICS:: Drawdown Recovery 307
+STATISTICS:: OrderListHash 311aadb1a2d8053d55a703b6a1cbc3f4
+2025-11-09T15:44:28.1902040Z TRACE:: BacktestingResultHandler.SendAnalysisResult(): Processed final packet
+2025-11-09T15:44:28.1903190Z TRACE:: Engine.Run(): Disconnecting from brokerage...
+2025-11-09T15:44:28.1903630Z TRACE:: Engine.Run(): Disposing of setup handler...
+2025-11-09T15:44:28.1903830Z TRACE:: Engine.Main(): Analysis Completed and Results Posted.
+2025-11-09T15:44:28.1904890Z TRACE:: DataMonitor.Exit(): start...
+2025-11-09T15:44:28.1905020Z TRACE:: StopSafely(): Waiting for '' thread to stop...
+2025-11-09T15:44:28.1911960Z TRACE:: DataMonitor.GenerateReport():
+DATA USAGE:: Total data requests 3
+DATA USAGE:: Succeeded data requests 3
+DATA USAGE:: Failed data requests 0
+DATA USAGE:: Failed data requests percentage 0%
+DATA USAGE:: Total universe data requests 0
+DATA USAGE:: Succeeded universe data requests 0
+DATA USAGE:: Failed universe data requests 0
+DATA USAGE:: Failed universe data requests percentage 0%
+2025-11-09T15:44:28.1922690Z TRACE:: DataMonitor.Exit(): end
+2025-11-09T15:44:28.1936110Z TRACE:: Engine.Main(): Packet removed from queue: RsiMaCrossAlgorithm
+2025-11-09T15:44:28.1936500Z TRACE:: LeanEngineSystemHandlers.Dispose(): start...
+2025-11-09T15:44:28.1938080Z TRACE:: LeanEngineSystemHandlers.Dispose(): Disposed of system handlers.
+2025-11-09T15:44:28.1938800Z TRACE:: LeanEngineAlgorithmHandlers.Dispose(): start...
+2025-11-09T15:44:28.1939390Z TRACE:: LocalObjectStore.Dispose(): start...
+2025-11-09T15:44:28.1940400Z TRACE:: LocalObjectStore.Dispose(): end
+2025-11-09T15:44:28.1940960Z TRACE:: LeanEngineAlgorithmHandlers.Dispose(): Disposed of algorithm handlers.

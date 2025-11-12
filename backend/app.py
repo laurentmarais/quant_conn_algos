@@ -357,13 +357,58 @@ def _extract_indicator_series(report: dict[str, Any], symbol: str) -> list[dict[
     return indicators
 
 
-def _extract_trades(summary: dict[str, Any]) -> list[dict[str, Any]]:
-    closed_trades = (
-        summary.get("totalPerformance", {}).get("closedTrades")
-        or []
-    )
+def _extract_trades(
+    summary: dict[str, Any],
+    report: dict[str, Any] | None = None,
+    symbol: str | None = None,
+) -> list[dict[str, Any]]:
+    """Return closed trades from the summary or report, filtered by symbol when provided."""
+
+    def _candidate_trades(payload: dict[str, Any] | None) -> list[dict[str, Any]]:
+        if not isinstance(payload, dict):
+            return []
+
+        total_performance = payload.get("totalPerformance")
+        if isinstance(total_performance, dict):
+            closed = total_performance.get("closedTrades")
+            if isinstance(closed, list) and closed:
+                return closed
+
+        closed = payload.get("closedTrades")
+        if isinstance(closed, list) and closed:
+            return closed
+
+        return []
+
+    closed_trades = _candidate_trades(summary)
+    if not closed_trades:
+        closed_trades = _candidate_trades(report)
+
+    symbol_filter = symbol.upper() if isinstance(symbol, str) else None
+
     trades: list[dict[str, Any]] = []
     for idx, trade in enumerate(closed_trades, start=1):
+        if not isinstance(trade, dict):
+            continue
+
+        if symbol_filter:
+            symbol_values: set[str] = set()
+            raw_symbol = trade.get("symbol")
+            if isinstance(raw_symbol, dict):
+                for key in ("value", "ticker", "permtick", "id"):
+                    value = raw_symbol.get(key)
+                    if isinstance(value, str):
+                        symbol_values.add(value.upper())
+            elif isinstance(raw_symbol, str):
+                symbol_values.add(raw_symbol.upper())
+
+            alt = trade.get("symbolId") or trade.get("symbolID")
+            if isinstance(alt, str):
+                symbol_values.add(alt.upper())
+
+            if symbol_values and symbol_filter not in symbol_values:
+                continue
+
         entry_date = _format_iso_date(trade.get("entryTime"))
         exit_date = _format_iso_date(trade.get("exitTime"))
         entry_price = _parse_decimal(trade.get("entryPrice"))
@@ -382,6 +427,7 @@ def _extract_trades(summary: dict[str, Any]) -> list[dict[str, Any]]:
                 "profit": float(profit) if profit is not None else 0.0,
             }
         )
+
     return trades
 
 
@@ -480,9 +526,9 @@ def _build_backtest_result(
         "netProfitPercent": net_profit_percent,
         "metrics": {k: v for k, v in metrics.items() if v is not None},
         "equityCurve": _extract_equity_curve(summary),
-    "priceSeries": _extract_price_series(report, payload.symbol),
-        "trades": _extract_trades(summary),
-    "orders": _extract_orders(report),
+        "priceSeries": _extract_price_series(report, payload.symbol),
+        "trades": _extract_trades(summary, report, payload.symbol),
+        "orders": _extract_orders(report),
         "indicators": indicators,
         "statistics": statistics,
         "runtimeStatistics": summary.get("runtimeStatistics", {}),
